@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\User;// Adding user model
+use App\UsersPhoneNumber;// Adding phoneNumber Model
 use Illuminate\Support\Facades\Hash;//to check hash Password
-
+use Twilio\Rest\Client;// Rest API
 
 class AdminController extends Controller
 {
@@ -79,4 +80,69 @@ class AdminController extends Controller
         // displaying a successful message when the admin logout successfully
         return redirect('/admin')->with('flash_message_success','Logged Out Successfully');
     }
+
+    // SMS PORTAL Code section
+ /**
+     * Show the forms with users phone number details.
+     *
+     * @return Response
+     */
+    public function show()
+    {
+        $users = UsersPhoneNumber::all();
+        return view('admin.smsportal', compact("users"));
+    }
+    /**
+     * Store a new user phone number.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function storePhoneNumber(Request $request)
+    {
+        //run validation on data sent in
+        $validatedData = $request->validate([
+            'phone_number' => 'required|unique:users_phone_number|numeric',
+        ]);
+        $user_phone_number_model = new UsersPhoneNumber($request->all());
+        $user_phone_number_model->save();
+        //$this->sendMessage('User registration successful!!', $request->phone_number);
+        //return back()->with(['success' => "{$request->phone_number} registered"]);
+        return redirect('/admin/show')->with('flash_message_success','Phone Number Registered Successfully !');
+        
+    }
+    /**
+     * Send message to a selected users
+     */
+    public function sendCustomMessage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'users' => 'required|array',
+            'body' => 'required',
+        ]);
+        $recipients = $validatedData["users"];
+        // iterate over the array of recipients and send a twilio request for each
+        foreach ($recipients as $recipient) {
+            $this->sendMessage($validatedData["body"], $recipient);
+        }
+        //return back()->with(['success' => "Messages on their way!"]);
+        return redirect('/admin/show')->with('flash_message_success', 'Message Sent!');
+        
+    }
+    /**
+     * Sends sms to user using Twilio's programmable sms client
+     * @param String $message Body of sms
+     * @param Number $recipients Number of recipient
+     */
+    private function sendMessage($message, $recipients)
+    {
+        $account_sid = env("TWILIO_ACCOUNT_SID");
+        $auth_token = env("TWILIO_AUTH_TOKEN");
+        $twilio_number = env("TWILIO_PHONE_NUMBER");
+        $client = new Client($account_sid, $auth_token);
+        $client->messages->create($recipients, ['from' => $twilio_number, 'body' => $message]);
+    }
+
+
+
 }

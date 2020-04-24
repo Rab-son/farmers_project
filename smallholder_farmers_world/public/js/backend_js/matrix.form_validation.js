@@ -12,7 +12,7 @@ $(document).ready(function(){
 				if(resp=="false"){
 					$("#chckPwd").html("<font color='red'> Current Password Is Incorrect</font>");
 				} else if(resp=="true") {
-					$("#chckPwd").html("<font color='gree'> Current Password Is Correct</font>");
+					$("#chckPwd").html("<font color='green'> Current Password Is Correct</font>");
 				}
 			}, error:function(){
 				alert("Error");
@@ -65,9 +65,11 @@ $(document).ready(function(){
 				required:true,
 				max:24
 			},
-			number:{
+			phone_number:{
 				required:true,
-				number:true
+				number:true,
+				minlength:10,
+				maxlength:16
 			}
 		},
 		errorClass: "help-inline",
@@ -80,7 +82,36 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
-	
+
+	$("#text_validate").validate({
+		rules:{
+			min:{
+				required: true,
+				min:10
+			},
+			max:{
+				required:true,
+				max:24
+			},
+			body:{
+				required:true,
+				text:true,
+				minlength:0,
+				maxlength:100
+			}
+		},
+		errorClass: "help-inline",
+		errorElement: "span",
+		highlight:function(element, errorClass, validClass) {
+			$(element).parents('.control-group').addClass('error');
+		},
+		unhighlight: function(element, errorClass, validClass) {
+			$(element).parents('.control-group').removeClass('error');
+			$(element).parents('.control-group').addClass('success');
+		}
+	});
+
+
 	$("#password_validate").validate({
 		rules:{
 			current_pwd:{

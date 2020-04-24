@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,6 +11,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Orders;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +27,18 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/admin/settings','AdminController@settings');// Route for settings
     Route::get('/admin/check-pwd', 'AdminController@chckPassword');// Route for checking password
     Route::match(['get','post'], '/admin/update-pwd', 'AdminController@updatePassword');// Route for updating password
+
+    //Sms portal routes
+    Route::get('/admin/show', 'AdminController@show');
+    Route::post('/admin/storePhoneNumber', 'AdminController@storePhoneNumber');
+    Route::post('/admin/custom', 'AdminController@sendCustomMessage');
+
+    // Sms order tracking system
+    Route::get('/', function () {
+        return Orders::all();
+    });
+    Route::post('/order', "OrderController@getOrder");
+
 });
 
 

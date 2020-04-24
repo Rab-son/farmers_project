@@ -30,13 +30,25 @@
       <ul>
         <li><a href="#"><i class="icon icon-user" ></i> Add Supplier </a></li>
         <li><a href="#"><i class="icon icon-book" ></i> View Supplier </a></li>
-
       </ul>
     </li>
     <!--Financial Management Section-->
     <li class="submenu"> <a href="#"><i class="icon icon-money"></i> <span> Financial Management </span><span class="label label-important">1</span></a>
       <ul>
-        <li><a href="#"><i class="icon icon-calculator"></i> Perform Calculations</a></li>
+        <li><a href="#"><i class="icon  icon-check"></i> Perform Calculations</a></li>
+      </ul>
+    </li>
+    <!--SMS Portal Section-->
+    <li class="submenu"> <a href="#"><i class="icon  icon-envelope" ></i> <span> SMS Portal</span> <span class="label label-important">2</span></a>
+      <ul>
+        <li><a href="{{ url('/admin/show') }}"><i class="icon icon-folder-open" ></i> SMS Management </a></li>
+        <li><a href="#"><i class="icon icon-inbox" ></i> Check Message  </a></li>
+      </ul>
+    </li>
+    <!--SMS Order Section-->
+    <li class="submenu"> <a href="#"><i class="icon icon-envelope-alt" ></i> <span> SMS Order</span> <span class="label label-important">1</span></a>
+      <ul>
+        <li><a href="#"><i class="icon icon-shopping-cart" ></i> Order Tracking </a></li>
       </ul>
     </li>
   </ul>
