@@ -5,90 +5,84 @@
 <div id="content">
 <!--breadcrumbs-->
   <div id="content-header">
-    <div id="breadcrumb"> <a href="index.html" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a></div>
+    <div id="breadcrumb"> <a href="{{ url('/admin/dashboard') }}" title="Dashboard" class="tip-bottom"><i class="icon-dashboard"></i> Dashboard</a></div>
   </div>
+  <!-- Displaying an error message when the user has provided wrong credintials -->  
+  @if(Session::has('flash_message_error'))
+    <div class="alert alert-danger alert-block" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <strong>{!! session('flash_message_error') !!}</strong>
+    </div>
+  @endif         
+  @if(Session::has('flash_message_success'))
+      <div class="alert alert-success alert-block" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>{!! session('flash_message_success') !!}</strong>
+      </div>
+  @endif
 <!--End-breadcrumbs-->
 
 <!--Action boxes-->
   <div class="container-fluid">
     <div class="quick-actions_homepage">
       <ul class="quick-actions">
-        <li class="bg_lb"> <a href="index.html"> <i class="icon-dashboard"></i> <span class="label label-important">20</span> My Dashboard </a> </li>
-        <li class="bg_lg span3"> <a href="charts.html"> <i class="icon-signal"></i> Charts</a> </li>
-        <li class="bg_ly"> <a href="widgets.html"> <i class="icon-inbox"></i><span class="label label-success">101</span> Widgets </a> </li>
-        <li class="bg_lo"> <a href="tables.html"> <i class="icon-th"></i> Tables</a> </li>
-        <li class="bg_ls"> <a href="grid.html"> <i class="icon-fullscreen"></i> Full width</a> </li>
-        <li class="bg_lo span3"> <a href="form-common.html"> <i class="icon-th-list"></i> Forms</a> </li>
-        <li class="bg_ls"> <a href="buttons.html"> <i class="icon-tint"></i> Buttons</a> </li>
-        <li class="bg_lb"> <a href="interface.html"> <i class="icon-pencil"></i>Elements</a> </li>
-        <li class="bg_lg"> <a href="calendar.html"> <i class="icon-calendar"></i> Calendar</a> </li>
-        <li class="bg_lr"> <a href="error404.html"> <i class="icon-info-sign"></i> Error</a> </li>
-
+      @if(Session::get('adminDetails')['farmers_access']==1)
+        <li class="bg_ls span3"> <a href="{{ url('/admin/view-farmers') }}"> <i class="icon-group"></i> <span class="label label-important">{{$farmerCount->total()}}</span> View Farmer </a> </li>
+      @endif
+      @if(Session::get('adminDetails')['markets_access']==1)
+        <li class="bg_lg span3"> <a href="{{ url('/admin/view-markets') }}"> <i class="icon-shopping-cart"></i> <span class="label label-important">{{$marketCount->total()}}</span>View Markets</a> </li>
+      @endif
+      @if(Session::get('adminDetails')['suppliers_access']==1) 
+        <li class="bg_lo span3"> <a href="{{ url('/admin/view-suppliers') }}"> <i class="icon-truck"></i> <span class="label label-important">{{$supplierCount->total()}}</span> View Suppliers</a> </li>
+      @endif
+      @if(Session::get('adminDetails')['advisors_access']==1)
+        <li class="bg_lv span3"> <a href="{{ url('/admin/view-advisors') }}"> <i class="icon-user"></i> <span class="label label-important">{{$advisorCount->total()}}</span> View Advisors</a> </li>
+      @endif
+      @if(Session::get('adminDetails')['markets_access']==1)
+        <li class="bg_lb span3"> <a href="{{ url('/admin/view-markets') }}"> <i class="icon-envelope"></i><span class="label label-important">{{$ussdNotificationCount->total()}}</span> Sent Notifications</a> </li>
+      @endif
+      @if(Session::get('adminDetails')['ussd_notifications_access']==1)
+        <li class="bg_lg"> <a href="{{ url('/admin/send-notification') }}"> <i class="icon icon-inbox"></i> Check Messages</a> </li>
+        <li class="bg_lr"> <a href="{{ url('/admin/view-notifications') }}"> <i class="icon-tag"></i> Check Orders</a> </li>
+      @endif
       </ul>
     </div>
+
 <!--End-Action boxes-->    
 
 <!--Chart-box-->    
     <div class="row-fluid">
       <div class="widget-box">
-        <div class="widget-title bg_lg"><span class="icon"><i class="icon-signal"></i></span>
-          <h5>Site Analytics</h5>
+        <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
+          <h5>Small Holder Farmers World Management</h5>
         </div>
         <div class="widget-content" >
           <div class="row-fluid">
-            <div class="span9">
-              <div class="chart"></div>
-            </div>
-            <div class="span3">
-              <ul class="site-stats">
-                <li class="bg_lh"><i class="icon-user"></i> <strong>2540</strong> <small>Total Users</small></li>
-                <li class="bg_lh"><i class="icon-plus"></i> <strong>120</strong> <small>New Users </small></li>
-                <li class="bg_lh"><i class="icon-shopping-cart"></i> <strong>656</strong> <small>Total Shop</small></li>
-                <li class="bg_lh"><i class="icon-tag"></i> <strong>9540</strong> <small>Total Orders</small></li>
-                <li class="bg_lh"><i class="icon-repeat"></i> <strong>10</strong> <small>Pending Orders</small></li>
-                <li class="bg_lh"><i class="icon-globe"></i> <strong>8540</strong> <small>Online Orders</small></li>
-              </ul>
+          <div class="widget-content nopadding collapse in" id="collapseG2">
+            <div class="container-fluid">
+                <ul class="site-stats">
+                @if(Session::get('adminDetails')['farmers_access']==1)
+                  <li class="bg_lh"><a href="{{ url('/admin/add-farmer') }}"><i class="icon-group" style="color: white;"></i> <strong>{{$farmerCount->total()}}</strong> <small><p style="color: white;">Add Farmer</p></small></a></li>
+                @endif
+                @if(Session::get('adminDetails')['advisors_access']==1)
+                  <li class="bg_lh"><a href="{{ url('/admin/add-advisor') }}"><i class="icon-user" style="color: white;"></i> <strong>{{$advisorCount->total()}}</strong> <small><p style="color: white;">Add Advisor</p></small></a></li>
+                @endif
+                @if(Session::get('adminDetails')['markets_access']==1)
+                  <li class="bg_lh"><a href="{{ url('/admin/add-market') }}"><i class="icon-shopping-cart" style="color: white;"></i> <strong>{{$marketCount->total()}}</strong> <small><p style="color: white;">Add Market</p></small></a></li>
+                @endif
+                @if(Session::get('adminDetails')['suppliers_access']==1)
+                  <li class="bg_lh"><a href="{{ url('/admin/add-supplier') }}"><i class="icon-truck" style="color: white;"></i> <strong>{{$supplierCount->total()}}</strong> <small><p style="color: white;">Add Supplier</p></small></a></li>
+                @endif
+                  <li class="bg_lh"><a href="{{ url('/admin/add-show-phonenumber') }}"><i class="icon-envelope" style="color: white;"></i> <strong>10</strong> <small><p style="color: white;">Send Message</p></small></a></li>
+                  <li class="bg_lh"><i class="icon-globe"></i> <strong>8540</strong> <small>Perform Calculations</small></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 <!--End-Chart-box--> 
-    <hr/>
-    <div class="row-fluid">
-      <div class="span6">
-        <div class="widget-box">
-          <div class="widget-title bg_ly" data-toggle="collapse" href="#collapseG2"><span class="icon"><i class="icon-chevron-down"></i></span>
-            <h5>Latest Posts</h5>
-          </div>
-          <div class="widget-content nopadding collapse in" id="collapseG2">
-            <ul class="recent-posts">
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="{{ asset('images/backend_images/img/demo/av1.jpg') }}"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="{{ asset('images/backend_images/img/demo/av2.jpg') }}"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.It has multiple paragraphs and is full of waffle to pad out the comment.</a> </p>
-                </div>
-              </li>
-              <li>
-                <div class="user-thumb"> <img width="40" height="40" alt="User" src="{{ asset('images/backend_images/img/demo/av4.jpg') }}"> </div>
-                <div class="article-post"> <span class="user-info"> By: john Deo / Date: 2 Aug 2012 / Time:09:27 AM </span>
-                  <p><a href="#">This is a much longer one that will go on for a few lines.Itaffle to pad out the comment.</a> </p>
-                </div>
-              <li>
-                <button class="btn btn-warning btn-mini">View All</button>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 

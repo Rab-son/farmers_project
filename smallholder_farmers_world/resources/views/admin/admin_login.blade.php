@@ -1,15 +1,19 @@
+@extends('layouts.adminLayout.admin_top_design')
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
         <title>SFW Admin Panel | Login</title><meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/ico" href="{{asset('images/backend_images/adminstrator.png')}}" />
-		<link rel="stylesheet" href="{{ asset('css/backend_css/bootstrap.min.css') }}" />
-		<link rel="stylesheet" href="{{ asset('css/backend_css/bootstrap-responsive.min.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/backend_css/matrix-login.css') }}" />
-        <link href="{{ asset('fonts/backend_fonts/css/font-awesome.css') }}" rel="stylesheet" />
+        <link rel="icon" type="image/ico" href="{{asset('img/adminstrator.png')}}" />
+    	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+		<link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/matrix-login.css') }}" />
+        <link rel="stylesheet" href="{{asset('css/matrix-style.css')}}" />
+        <link rel="stylesheet" href="{{asset('css/matrix-media.css')}}" />
+        <link rel="stylesheet" href="{{ asset('css/matrix-login.css') }}" />
+        <link href="{{ asset('font-awesome/css/font-awesome.css') }}" rel="stylesheet" />
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
+
     </head>
     <body>
         <div id="loginbox">
@@ -31,13 +35,13 @@
                 </div>
             @endif
             <form id="loginform" class="form-vertical" method="POST" action="{{ url('admin') }}"> {{ csrf_field() }}
-				 <div class="control-group normal_text"> <h4><img src={{ asset('images/backend_images/adminstrator.png') }} style="width:130px;" alt="Logo" /></h4>
+				 <div class="control-group normal_text"> <h4><img src={{ asset('img/adminstrator.png') }} style="width:130px;" alt="Logo" /></h4>
                  <br><h4> Smallholder Farmers World Admin Panel </h4>
                  </div>
                 <div class="control-group">
                     <div class="controls">
                         <div class="main_input_box">
-                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><input id="email" type="email" name="email" placeholder="email" />
+                            <span class="add-on bg_lg"><i class="icon-user"> </i></span><input id="username" type="email" name="username" placeholder="username" />
                         </div>
                     </div>
                 </div>
@@ -64,13 +68,13 @@
                
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; Back to login</a></span>
-                    <span class="pull-right"><a class="btn btn-info"/>Reecover</a></span>
+                    <span class="pull-right"><a class="btn btn-info">Reecover</a></span>
                 </div>
             </form>
         </div>
-        <script src="{{asset('js/backend_js/jquery.min.js')}}"></script>  
-        <script src="{{asset('js/backend_js/matrix.login.js')}}"></script> 
-        <script src="{{asset('js/backend_js/bootstrap.min.js')}}"></script> 
+        <script src="{{asset('js/jquery.min.js')}}"></script>  
+        <script src="{{asset('js/matrix.login.js')}}"></script> 
+        <script src="{{asset('js/bootstrap.min.js')}}"></script> 
     </body>
 
 </html>

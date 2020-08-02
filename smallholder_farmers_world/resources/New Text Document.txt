@@ -1,0 +1,24 @@
+1.) Table Creation -> php artisan make:migration create_notifications_table
+Open it and make changes where necessary
+	-> in notifications table we need id, parent_id, farmer_name, 
+	   message(description),status fields
+2.) php artisan migrate
+3.) php artisan make:controller UssdNotificationController
+4.) php artisan make:model UssdNotification
+5.) create routes in web.php
+6.) add functions in the controller
+
+
+
+----
+Markets - Category
+Products sold - Sub Category
+Supplier - Category
+Products supplied - Sub Category
+
+Farmer - Category
+Notification - Sub Category
+<li><a href="{{ url('/admin/show') }}"><i class="icon icon-folder-open" ></i> Send Notification </a></li>
+
+1.1) Update addCategory function
+-> create levels that wukk contain all the main categories having parent_id as 0
