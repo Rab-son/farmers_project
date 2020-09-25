@@ -103,7 +103,8 @@ class MarketController extends Controller
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
     	if(!empty($mark_id)){
-    		Market::where(['mark_id'=>$mark_id])->delete();
+            Market::where(['mark_id'=>$mark_id])->delete();
+            MarketProduct::where(['market_id'=>$mark_id])->delete();
     		return redirect()->back()->with('flash_message_success','Market Details Deleted Successfully');
     	}
     }

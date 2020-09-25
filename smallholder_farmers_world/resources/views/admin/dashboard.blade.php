@@ -42,9 +42,10 @@
         <li class="bg_lb span3"> <a href="{{ url('/admin/view-markets') }}"> <i class="icon-envelope"></i><span class="label label-important">{{$ussdNotificationCount->total()}}</span> Sent Notifications</a> </li>
       @endif
       @if(Session::get('adminDetails')['ussd_notifications_access']==1)
-        <li class="bg_lg"> <a href="{{ url('/admin/send-notification') }}"> <i class="icon icon-inbox"></i> Check Messages</a> </li>
-        <li class="bg_lr"> <a href="{{ url('/admin/view-notifications') }}"> <i class="icon-tag"></i> Check Orders</a> </li>
+        <li class="bg_lg"> <a href="{{ url('/admin/view-notifications') }}"> <i class="icon icon-inbox"></i> Check Messages</a></li>
       @endif
+        
+        <li class="bg_lr"> <a href="{{ url('/admin/view-chats') }}"> <i class="icon-comment"></i><span class="label label-important">{{$chatlogCount->total()}}</span> Live Chat</a> </li>
       </ul>
     </div>
 
@@ -74,7 +75,7 @@
                   <li class="bg_lh"><a href="{{ url('/admin/add-supplier') }}"><i class="icon-truck" style="color: white;"></i> <strong>{{$supplierCount->total()}}</strong> <small><p style="color: white;">Add Supplier</p></small></a></li>
                 @endif
                   <li class="bg_lh"><a href="{{ url('/admin/add-show-phonenumber') }}"><i class="icon-envelope" style="color: white;"></i> <strong>10</strong> <small><p style="color: white;">Send Message</p></small></a></li>
-                  <li class="bg_lh"><i class="icon-globe"></i> <strong>8540</strong> <small>Perform Calculations</small></li>
+                  <li class="bg_lh"><a href="{{ url('/admin/view-calculations') }}"><i class="icon-truck" style="color: white;"></i> <strong>Maize</strong> <small><p style="color: white;">Perform Calculations</p></small></a></li>
                 </ul>
               </div>
             </div>

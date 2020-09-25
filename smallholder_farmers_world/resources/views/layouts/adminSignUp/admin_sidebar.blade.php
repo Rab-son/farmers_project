@@ -62,13 +62,7 @@
           <a href="{{ url('/admin/view-notifications') }}"><i class="icon icon-inbox" ></i> Sent Notifications  </a></li>
         <li><a href="#"><i class="icon icon-inbox" ></i> Received Notifications </a></li>
         <li <?php if(preg_match("/show-phonenumber/i", $url)){ ?> class="active" <?php } ?>>
-          <a href="{{ url('/admin/show-phonenumber') }}"><i class="icon icon-inbox" ></i> Send SMS </a></li>
-      </ul>
-    </li>
-    <!--SMS Order Section-->
-    <li class="submenu"> <a href="#"><i class="icon icon-envelope-alt" ></i> <span> SMS Order</span> <span class="label label-important">1</span></a>
-      <ul>
-        <li><a href="#"><i class="icon icon-shopping-cart" ></i> Order Tracking </a></li>
+          <a href="{{ url('/admin/show-phonenumber') }}"><i class="icon  icon-envelope" ></i> Send SMS </a></li>
       </ul>
     </li>
     @endif

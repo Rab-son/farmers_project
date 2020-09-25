@@ -20,6 +20,9 @@ class FarmerController extends Controller
             $data = $request->all();
             $farmerCount = Farmer::where('id_number',$data['id_number'])->count();
             $farmerCount1 = Farmer::where('phonenumber',$data['phone_number'])->count();
+            if(empty($data['sex'])){
+                $data['sex'] = 0;
+            }
             if($farmerCount>0){
                 return redirect()->back()->with('flash_message_error','Farmer With That ID Number Already Exists!');
             }elseif($farmerCount1>0){
@@ -59,7 +62,10 @@ class FarmerController extends Controller
         }
         $farmerDetails = Farmer::where(['id'=>$id])->first();
         if($request->isMethod('post')){
-    		$data = $request->all();
+            $data = $request->all();
+            if(empty($data['sex'])){
+                $data['sex'] = 0;
+            }
             Farmer::where(['id'=>$id])->update(['full_name'=>$data['farmer_name'],
                                                   'phonenumber'=>$data['phone_number'],
                                                   'location'=>$data['location'],
@@ -81,6 +87,7 @@ class FarmerController extends Controller
     	if(!empty($id)){
             Farmer::where(['id'=>$id])->delete();
             UssdNotification::where(['farmer_id'=>$id])->delete();
+            FarmerProduct::where(['farmer_id'=>$id])->delete();
     		return redirect()->back()->with('flash_message_success','Farmer Details Deleted Successfully');
     	}
     }

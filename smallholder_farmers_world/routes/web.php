@@ -61,6 +61,12 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::get('/admin/view-markets','MarketController@viewMarkets');// Route for viewing market details
     Route::get('/admin/view-market-products','MarketController@viewMarketProducts');// Route for viewing product details
 
+    //Calculations
+    Route::get('/admin/view-calculations','CalculatorController@viewMaizeCalculator');// Route for calculating market details  
+
+    //Chat Room
+    Route::get('/admin/view-chats','ChatController@viewChats');// Route for calculating market details 
+
     // Supplier Management
     Route::match(['get','post'], '/admin/add-supplier', 'SupplierController@addSupplier');// Route for adding a supplier
     Route::match(['get', 'post'], '/admin/edit-supplier/{id}', 'SupplierController@editSupplier');// Route for editing supplier details

@@ -62,7 +62,8 @@ class SupplierController extends Controller
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
     	if(!empty($id)){
-    		Supplier::where(['id'=>$id])->delete();
+            Supplier::where(['id'=>$id])->delete();
+            SupplierProduct::where(['supplier_id'=>$id])->delete();
     		return redirect()->back()->with('flash_message_success','Supplier Details Deleted Successfully');
     	}
     }
