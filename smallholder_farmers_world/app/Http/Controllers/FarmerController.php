@@ -88,6 +88,7 @@ class FarmerController extends Controller
             Farmer::where(['id'=>$id])->delete();
             UssdNotification::where(['farmer_id'=>$id])->delete();
             FarmerProduct::where(['farmer_id'=>$id])->delete();
+            //UssdNotification::where(['id'=>$id])->delete();
     		return redirect()->back()->with('flash_message_success','Farmer Details Deleted Successfully');
     	}
     }

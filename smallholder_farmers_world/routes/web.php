@@ -12,10 +12,11 @@
 |
 */
 use App\Orders;
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+*/
 
 Route::match(['get','post'], '/admin','AdminController@login');// Route for admin login
 Route::match(['get','post'],'/admin/admin-register','AdminController@adminRegister');// Route for admin registration
@@ -95,11 +96,10 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::get('/admin/view-enquiries','CmsController@viewEnquiries');// Route to display enquiries
     Route::get('/admin/get-enquiries','CmsController@getEnquiries');// Get Enquiries
 
-    // Sms order tracking system
     Route::get('/', function () {
-        return Orders::all();
+        return Farmers::all();
     });
-    Route::post('/order', "OrderController@getOrder");
+
 
 });
 

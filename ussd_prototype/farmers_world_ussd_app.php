@@ -9315,7 +9315,7 @@
  			  		echo $response;	
                 break;
 				
-				case 2:
+				case 3:
 					// Request again for district - level has not changed...
 					$response = "CON District Can Not Be Empty.\nPlease Enter Your District To Continue\n";
 						
@@ -9324,7 +9324,7 @@
 				    echo $response;	
 				break;
 
-				case 3:
+				case 4:
 			    	// Request again for district - level has not changed...
                     $response = "CON ID Number Can Not Be Empty.\nPlease Enter Your National ID Number To Register\n";
                     
