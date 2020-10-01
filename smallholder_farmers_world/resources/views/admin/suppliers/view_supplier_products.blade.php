@@ -63,7 +63,7 @@
                   </td>
                   <td style="text-align: center; text-transform: uppercase"> {{ $product->selling_price }}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $product->supplier_location }}</td>
-                  <td style="text-align: center;"><a href="#myModal{{ $product->id }}" data- class="btn btn-success btn-mini">View Other Attr</a></td>
+                  <td style="text-align: center;"><a href="#myModal3{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View Other Attr</a></td>
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
                       <a href="{{ url('/admin/edit-supplier-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a> 
@@ -76,8 +76,8 @@
                       <h3 style="text-align: center; text-transform: uppercase; color: black">{{ $product->supplier_name}} Full Details</h3>
                     </div>
                     <div class="modal-body">
-                      <p style="text-align: center; text-transform: capitalize"> Product Name : {{ $product->product_name}} </p>
-                      <p style="text-align: center; text-transform: capitalize">Price    : {{ $product->selling_price }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Name     : {{ $product->product_name}} </p>
+                      <p style="text-align: center; text-transform: capitalize">Price    :MWK {{ $product->selling_price }} </p>
                       <p style="text-align: center; text-transform: capitalize">Price    : {{ $product->supplier_location }} </p>
                     </div>
                   </div>
@@ -92,6 +92,22 @@
                     <div class="modal-footer"> 
                       <a href="#" class="btn btn-success" data-dismiss="modal">Cancel</a> 
                       <a href="{{ url('/admin/delete-supplier-product/'.$product->id) }}" id="add-event-submit" class="btn btn-danger">Proceed To Delete</a> 
+                    </div>
+                  </div>
+
+
+                  <div id="myModal3{{ $product->id }}" class="modal hide">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3 style = "text-align: center"> Other {{ $product->supplier_name }} Attributes</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p style="text-align: center; text-transform: capitalize">Name : {{ $product->product_name}} </p>
+                      <p style="text-align: center; text-transform: capitalize">Description   : {{ $product->description }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Required Amount : {{ $product->amount }} </p>
+                    </div>
+                    <div class="modal-footer"> 
+                      <a href="#" class="btn btn-success" data-dismiss="modal">Cancel</a> 
                     </div>
                   </div>
                 @endforeach

@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use Session;
 use App\Market;
 use App\MarketProduct;
+use App\Exports\marketsExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class MarketController extends Controller
 {
@@ -69,7 +72,13 @@ class MarketController extends Controller
     	// Categories drop down end
 
     	return view('admin.markets.add_market_product')->with(compact('markets_drop_down'));
-	}
+    }
+    
+    // Exporting Market details
+    public function exportMarkets(){
+        return Excel::download(new marketsExport,'markets.xlsx');
+    }   
+
     // Displaying Markets in the system
     public function viewMarkets(){
         if(Session::get('adminDetails')['markets_access']==0){
@@ -166,6 +175,24 @@ class MarketController extends Controller
     		return redirect()->back()->with('flash_message_success','Market Product Details Deleted Successfully');
     	}
     }
+
+        // View Market Charts
+        public function viewMarketCharts(){
+
+            $current_month_markets = Market::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->count();
+            $last_month_markets = Market::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
+            $last_to_last_month_markets = Market::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
+           
+            
+            return view('admin.markets.view_markets_charts')->with(compact('current_month_markets','last_month_markets','last_to_last_month_markets'));;
+            /*
+            
+            return view('admin.users.view_users_charts')->with(compact('current_month_users','last_month_users','last_to_last_month_users'));
+    
+            */
+        }
+
+
     /*
     // edit farmer notificatio
     public function editMarketProduct(Request $request, $id=null){

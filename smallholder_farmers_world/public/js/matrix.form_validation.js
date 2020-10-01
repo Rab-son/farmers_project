@@ -71,9 +71,8 @@ $(document).ready(function(){
 			},
 			phone_number:{
 				required:true,
-				minlength:12,
-				maxlength:12,
-				number:true
+				minlength:13,
+				maxlength:13
 			},
 			dob:{
 				required:true,
@@ -111,9 +110,8 @@ $(document).ready(function(){
 			},
 			phone_number:{
 				required:true,
-				minlength:12,
-				maxlength:12,
-				number:true
+				minlength:13,
+				maxlength:13
 			},
 			dob:{
 				required:true,
@@ -193,6 +191,13 @@ $(document).ready(function(){
 			supplier_name:{
 				required:true
 			},
+			supplier_phonenumber:{
+				required:true,
+				minlength:10,
+				maxlength:10,
+				number:true
+
+			},
 			supplier_location:{
 				required:true,
 				number:false
@@ -239,8 +244,8 @@ $(document).ready(function(){
 			},
 			phone_number:{
 				required:true,
-				maxlength:12,
-				minlength:12
+				maxlength:10,
+				minlength:10
 
 			},
 			advisor_location:{

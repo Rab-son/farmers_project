@@ -49,8 +49,12 @@
                 <label class="control-label">Gender</label>
         
                 <div class="controls">
-                  <input type="checkbox" name="sex" id="sex" value="1" @if($farmerDetails->sex == "1") checked @endif>&nbsp;Male&nbsp;&nbsp;&nbsp;
-                  <input type="checkbox" name="sex" id="sex" value="2" @if($farmerDetails->sex == "2") checked @endif>&nbsp;Female&nbsp;&nbsp;&nbsp;
+                  <label>
+                  <input type="radio" name="sex" id="sex" value="1" @if($farmerDetails->sex == "1") checked @endif>&nbsp;Male&nbsp;&nbsp;&nbsp;
+                  </label>
+                  <label>
+                  <input type="radio" name="sex" id="sex" value="2" @if($farmerDetails->sex == "2") checked @endif>&nbsp;Female&nbsp;&nbsp;&nbsp;
+                  </label>
                 </div>
               </div>
               <div class="control-group">

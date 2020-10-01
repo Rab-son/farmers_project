@@ -54,11 +54,13 @@
                 <tr class="gradeX">
                   <td style="text-align: center; text-transform: capitalize">{{ $product->full_name }}</td>
                   <td style="text-align: center; text-transform: uppercase"> {{ $product->produce_name }}</td>
-                  <td style="text-align: center; text-transform: uppercase"> {{ $product->selling_price }}</td>
+                  <td style="text-align: center; text-transform: uppercase"> MWK {{ $product->selling_price }}</td>
 
                   <td style="text-align: center; text-transform: uppercase"> {{ $product->location }}</td>
                   
-                  <td style="text-align: center;"><a href="#myModal{{ $product->id }}" data- class="btn btn-success btn-mini">View Other Attr</a></td>
+
+
+                  <td style="text-align: center;"><a href="#myModal0{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View Other Attr</a></td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $product->phonenumber}}</td>
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
@@ -72,8 +74,8 @@
                       <h3 style="text-align: center; text-transform: uppercase; color: black">{{ $product->full_name}} Full Details</h3>
                     </div>
                     <div class="modal-body">
-                      <p style="text-align: center; text-transform: capitalize" >Input    : {{ $product->farmer_produce }} </p>
-                      <p style="text-align: center; text-transform: capitalize">Location     : {{ $product->price }} </p>
+                      <p style="text-align: center; text-transform: capitalize" >Farm Activity   : {{ $product->produce_name }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Product Location     : {{ $product->location }} </p>
                     </div>
                   </div>
                   <div id="myModal2{{ $product->id }}" class="modal hide">
@@ -88,7 +90,22 @@
                       <a href="#" class="btn btn-success" data-dismiss="modal">Cancel</a> 
                       <a href="{{ url('/admin/delete-farmer-product/'.$product->id) }}" id="add-event-submit" class="btn btn-danger">Proceed To Delete</a> 
                     </div>
-                  </div>      
+                  </div> 
+
+                  <div id="myModal0{{ $product->id }}" class="modal hide">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3 style = "text-align: center"> Other Attributes For {{ $product->product_name }} produced by  {{ $product->full_name }} </h3>
+                    </div>
+                    <div class="modal-body">
+                      <p style="text-align: center; text-transform: capitalize" > Required Amount  : {{ $product->amount }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Product Description     : {{ $product->description }} </p>
+                    </div>
+                    <div class="modal-footer"> 
+                      <a href="#" class="btn btn-success" data-dismiss="modal">Close</a> 
+                    </div>
+                  </div>  
+
                 @endforeach
               </tbody>
             </table>

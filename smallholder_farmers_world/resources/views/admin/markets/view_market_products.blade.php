@@ -63,7 +63,7 @@
                       <span style="color: red">Unavailable</span>
                     @endif
                   </td>
-                  <td style="text-align: center;"><a href="#myModal{{ $product->id }}" data- class="btn btn-success btn-mini">View Other Attr</a></td>
+                  <td style="text-align: center;"><a href="#myModal3{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View Other Attr</a></td>
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
                       <a href="{{ url('/admin/edit-market-product/'.$product->id) }}" class="btn btn-primary btn-mini">Edit</a> 
@@ -76,9 +76,9 @@
                       <h3 style="text-align: center; text-transform: uppercase; color: black">{{ $product->mark_name}} Full Details</h3>
                     </div>
                     <div class="modal-body">
-                      <p style="text-align: center; text-transform: capitalize" >Product Name   : {{ $product->product_name }} </p>
-                      <p style="text-align: center; text-transform: capitalize" >Selling Price  : {{ $product->selling_price }} </p>
-                      <p style="text-align: center; text-transform: capitalize" >Buying Price   : {{ $product->buying_price }} </p>
+                      <p style="text-align: center; text-transform: capitalize" >Product Name   :MWK {{ $product->product_name }} </p>
+                      <p style="text-align: center; text-transform: capitalize" >Selling Price  :MWK {{ $product->selling_price }} </p>
+                      <p style="text-align: center; text-transform: capitalize" >Buying Price   :MWK {{ $product->buying_price }} </p>
                     </div>
                   </div>
                   <div id="myModal2{{ $product->id }}" class="modal hide">
@@ -92,6 +92,21 @@
                     <div class="modal-footer"> 
                       <a href="#" class="btn btn-success" data-dismiss="modal">Cancel</a> 
                       <a href="{{ url('/admin/delete-market-product/'.$product->id) }}" id="add-event-submit" class="btn btn-danger">Proceed To Delete</a> 
+                    </div>
+                  </div>
+
+                  <div id="myModal3{{ $product->id }}" class="modal hide">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3 style = "text-align: center"> Other Attributes For {{ $product->product_name }}  by {{ $product->mark_name }} </h3>
+                    </div>
+                    <div class="modal-body">
+                    <p style="text-align: center; text-transform: capitalize"   >Name        :   {{ $product->product_name }} </p>
+                      <p style="text-align: center; text-transform: capitalize" >Description :   {{ $product->description }} </p>
+                      <p style="text-align: center; text-transform: capitalize" >Amount      :   {{ $product->amount }} </p>
+                    </div>
+                    <div class="modal-footer"> 
+                      <a href="#" class="btn btn-success" data-dismiss="modal">Cancel</a> 
                     </div>
                   </div>
                 @endforeach

@@ -32,13 +32,13 @@
               <div class="control-group"> {{ csrf_field() }}
                 <label class="control-label">Advisor Name</label>
                 <div class="controls">
-                  <input type="text" name="advisor_name" id="advisor_name" placeholder="Full Name">
+                  <input type="text" name="advisor_name" id="advisor_name" placeholder="e.g Kondwani Lusinje">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Specialty</label>
                 <div class="controls">
-                  <input type="text" name="specialty" id="specialty" placeholder="Advisor Specialization">
+                  <input type="text" name="specialty" id="specialty" placeholder="e.g Animal Production">
                 </div>
               </div>
               <div class="control-group">
@@ -50,25 +50,25 @@
               <div class="control-group">
                 <label class="control-label">Location</label>
                 <div class="controls">
-                  <input type="text" name="advisor_location" id="advisor_location" placeholder="Current Residence">
+                  <input type="text" name="advisor_location" id="advisor_location" placeholder="Zomba">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Service Day(s) Seperate By - If More </label>
                 <div class="controls">
-                  <input type="text" name="days" id="days" placeholder="Service Days">
+                  <input type="text" name="days" id="days" placeholder="Monday - Friday">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Start Time</label>
                 <div class="controls">
-                  <input type="text" name="start_time" id="start_time" placeholder="Time of Service">
+                  <input type="text" name="start_time" id="start_time" placeholder="e.g 7AM">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">End Time</label>
                 <div class="controls">
-                  <input type="text" name="end_time" id="end_time" placeholder="Time of Service">
+                  <input type="text" name="end_time" id="end_time" placeholder="e.g 5PM">
                 </div>
               </div>
               <div class="control-group">

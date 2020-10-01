@@ -19,6 +19,9 @@
       </div>
   @endif
   </div>
+  <div style="margin-left:20px;">
+    <a href="{{ url('/admin/export-farmers') }}" class="btn btn-primary btn-mini"><span class="icon"><i class="icon-book"></i></span> Export To Excel</a>
+  </div>
   <div class="container-fluid">
     <hr>
     <div class="row-fluid">
@@ -49,7 +52,7 @@
                   <td style="text-align: center"> {{ $i}}  </td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $farmer->full_name }}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $farmer->location }}</td>
-                  <td style="text-align: center"> + {{ $farmer->phonenumber }}</td>
+                  <td style="text-align: center">  {{ $farmer->phonenumber }}</td>
                   <td style="text-align: center; text-transform: uppercase"> {{ $farmer->id_number }}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $farmer->farm_activity }}</td>
                   <td style="text-align: center; text-transform: capitalize">  @if ($farmer->sex==1)
@@ -74,7 +77,11 @@
                       <p style="text-align: center; text-transform: capitalize">Location     : {{ $farmer->location }} </p>
                       <p style="text-align: center; text-transform: capitalize">Phone Number : + {{ $farmer->phonenumber }} </p>
                       <p style="text-align: center; text-transform: capitalize">Farm Activity: {{ $farmer->farm_activity }} </p>
-                      <p style="text-align: center; text-transform: capitalize">Gender: {{ $farmer->sex }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Gender:   @if ($farmer->sex==1)
+                        <span style>Male</span>
+                            @else 
+                        <span style>Female</span>
+                            @endif </td> </p>
                       <p style="text-align: center; text-transform: capitalize">Next of Kin  : {{ $farmer->next_of_kin }}</p>
                     </div>
                   </div>

@@ -60,7 +60,7 @@
                       $maizeYieldOf50kgs = 50 * 0.016;
                       $npkBags = 0.04 * $result1;
                       $ureaBags = 0.04 * $result1;
-                      echo"<center><strong> For $result1 Maize Bag(s) of 70Kgs, You will need <b>$maizeYieldOf50kgs </b> hectares of land <br>
+                      echo"<center><strong> For $result1 Maize Bag(s) of 50Kgs, You will need <b>$maizeYieldOf50kgs </b> hectares of land <br>
                             <b>$npkBags </b> NPK Fertilizer Bag(s) <b> $ureaBags </b> Urea Fertilizer Bag(s) With Moderate rainfall.
                            </strong><center>";
                     break;
@@ -68,7 +68,7 @@
                     $maizeYieldOf70kgs = 70 * 0.0224;
                     $npkBags = 0.0224 * $result1;
                     $ureaBags = 0.0224 * $result1;
-                    echo"<center><strong> For $result1 Maize Bag(s) of 50Kgs, You will need <b>$maizeYieldOf70kgs </b> hectares of land <br>
+                    echo"<center><strong> For $result1 Maize Bag(s) of 70Kgs, You will need <b>$maizeYieldOf70kgs </b> hectares of land <br>
                           <b>$npkBags </b> NPK Fertilizer Bag(s) <b> $ureaBags </b> Urea Fertilizer Bag(s) With Moderate rainfall.
                          </strong><center/>";
 

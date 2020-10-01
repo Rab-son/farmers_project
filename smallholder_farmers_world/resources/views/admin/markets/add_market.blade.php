@@ -19,13 +19,13 @@
               <div class="control-group"> {{ csrf_field() }}
                 <label class="control-label">Market Name</label>
                 <div class="controls">
-                  <input type="text" name="mark_name" id="mark_name" placeholder="Market Full Name">
+                  <input type="text" name="mark_name" id="mark_name" placeholder="e.g Mzimba Admarc">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Market Location</label>
                 <div class="controls">
-                  <input type="text" name="mark_location" id="mark_location" placeholder="Location For The Market">
+                  <input type="text" name="mark_location" id="mark_location" placeholder="e.g Mzimba">
                 </div>
               </div>
               <div class="form-actions">

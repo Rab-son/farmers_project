@@ -12,7 +12,7 @@ use App\Advisor;
 use App\Market;
 use App\UssdNotification;
 use App\Admin;
-use App\Chatlog;
+
 use Illuminate\Support\Facades\Hash;//to check hash Password
 
 
@@ -42,11 +42,10 @@ class AdminController extends Controller
         $farmerCount = Farmer::paginate();
         $supplierCount = Supplier::paginate();
         $advisorCount = Advisor::paginate();
-        $marketCount = Advisor::paginate();
-        $chatlogCount = Chatlog::paginate();
+        $marketCount = Market::paginate();
         $ussdNotificationCount = UssdNotification::paginate();
         
-        return view('admin.dashboard')->with(compact('farmerCount','supplierCount','advisorCount','marketCount','ussdNotificationCount','chatlogCount'));;
+        return view('admin.dashboard')->with(compact('farmerCount','supplierCount','advisorCount','marketCount','ussdNotificationCount'));;
     }
 
     // function for directing to settings page

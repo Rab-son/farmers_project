@@ -18,6 +18,10 @@
         </div>
     @endif
   </div>
+
+  <div style="margin-left:20px;">
+    <a href="{{ url('/admin/export-markets') }}" class="btn btn-primary btn-mini"><span class="icon"><i class="icon-book"></i></span> Export To Excel</a>
+  </div>
   <div class="container-fluid">
     <hr>
     <div class="row-fluid">

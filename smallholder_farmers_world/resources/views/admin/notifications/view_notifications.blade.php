@@ -44,10 +44,10 @@
                 <?php $i++; ?>
                 <tr class="gradeX">
                   <td style="text-align: center"> {{ $i}}  </td>
-                  <td style="text-align: center; text-transform: capitalize">0{{ $notification->phonenumber }}</td>
+                  <td style="text-align: center; text-transform: capitalize">{{ $notification->phonenumber }}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $notification->full_name}}</td>
-                  <td style="text-align: center; text-transform: uppercase"> {{ $notification->sent_message }}</td>
-                  <td style="text-align: center; text-transform: uppercase"> {{ $notification->sender_name }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $notification->sent_message }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $notification->sender_name }}</td>
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $notification->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
                       <a href="{{ url('/admin/edit-notification/'.$notification->id) }}" class="btn btn-primary btn-mini">Edit</a> 

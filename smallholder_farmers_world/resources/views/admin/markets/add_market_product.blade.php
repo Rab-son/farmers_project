@@ -44,7 +44,7 @@
               <div class="control-group">
                 <label class="control-label">Products Buying</label>
                 <div class="controls">
-                  <input type="text" name="product_name" id="product_name" style="width: 578px;">
+                  <input type="text" name="product_name" id="product_name" placeholder="e.g Maize or Mbuzi or Cotton " style="width: 578px;">
                 </div>
               </div>
               <div class="control-group">
@@ -56,15 +56,15 @@
               <div class="control-group">
                   <label for="sent_message" class="control-label">Price</label>
                   <div class="controls">
-                      <input type="text" name="buying_price" id="buying_price" style="width: 90px;" placeholder="Buying Price" required>
-                      <input type="text" name="selling_price" id="selling_price" style="width: 90px;" placeholder="Selling Price"  required>
+                      <input type="text" name="buying_price" id="buying_price" style="width: 130px;" placeholder="Buying Price e.g 10" required>
+                      <input type="text" name="selling_price" id="selling_price" style="width: 130px;" placeholder="Selling Price e.g 20"  required>
                   </div>
                   <label for="sent_message" class="control-label">Amount</label>
                   <div class="controls">
-                      <input type="text" name="amount" id="amount" style="width: 90px;" placeholder="Buying Price" required>
+                      <input type="text" name="amount" id="amount" style="width: 195px;" placeholder="e.g 10Kg or 10Bags or 3goats" required>
                   </div>
                 <div class="control-group">
-                    <label class="control-label">Status</label>
+                    <label class="control-label">Status (Available or Not Available)</label>
                     <div class="controls">
                         <input type="checkbox" name="status" id="status" value="1">
                     </div>

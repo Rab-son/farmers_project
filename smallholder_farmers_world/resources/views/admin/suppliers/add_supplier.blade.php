@@ -32,25 +32,25 @@
               <div class="control-group"> {{ csrf_field() }}
                 <label class="control-label">Supplier Name</label>
                 <div class="controls">
-                  <input type="text" name="supplier_name" id="supplier_name" placeholder="Full Name">
+                  <input type="text" name="supplier_name" id="supplier_name" placeholder="e.g Lusinje Sayenda Ltd">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Supplier Location</label>
                 <div class="controls">
-                  <input type="text" name="supplier_location" id="supplier_location" placeholder="Location">
+                  <input type="text" name="supplier_location" id="supplier_location" placeholder="e.g Zomba">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Supplier Phonenumber</label>
                 <div class="controls">
-                  <input type="text" name="supplier_phonenumber" id="supplier_phonenumber" placeholder="Phone Number">
+                  <input type="text" name="supplier_phonenumber" id="supplier_phonenumber" placeholder="e.g 0886788210">
                 </div>
               </div>
               <div class="control-group">
                 <label class="control-label">Working Hours</label>
                 <div class="controls">
-                  <input type="text" name="working_hour" id="working_hour" placeholder="Working Hours">
+                  <input type="text" name="working_hour" id="working_hour" placeholder="e.g 7AM-5PM">
                 </div>
               </div>
               <div class="control-group"> 

@@ -38,7 +38,7 @@
               <div class="control-group">
                 <label class="control-label">Phone Number</label>
                 <div class="controls">
-                  <input type="text" name="phone_number" id="phone_number" placeholder="e.g 265888888888">
+                  <input type="text" name="phone_number" id="phone_number" placeholder="e.g +265888888888">
                 </div>
               </div>
               <div class="control-group">
@@ -79,10 +79,16 @@
               <div class="control-group">
                 <label class="control-label">Sex</label>
                 <div class="controls">
-                  <input type="checkbox" name="sex" id="sex" value="1" style="margin-top: -5px">
-                      &nbsp;Male &nbsp;&nbsp;&nbsp;
-                  <input type="checkbox" name="sex" id="sex" value="2" style="margin-top: -5px">
-                  &nbsp;Female &nbsp;&nbsp;&nbsp;
+                  <label>
+                    <input type="radio" name="sex" id="sex" value="1" style="margin-top: -5px">
+                        &nbsp;Male &nbsp;&nbsp;&nbsp;</label>
+                  <label>
+                    <input type="radio" name="sex" id="sex" value="2" style="margin-top: -5px">
+                    &nbsp;Female &nbsp;&nbsp;&nbsp;
+                </label>
+
+
+                <label>
 
                 </div>
               </div>

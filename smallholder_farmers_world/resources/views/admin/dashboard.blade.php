@@ -44,12 +44,13 @@
       @if(Session::get('adminDetails')['ussd_notifications_access']==1)
         <li class="bg_lg"> <a href="{{ url('/admin/view-notifications') }}"> <i class="icon icon-inbox"></i> Check Messages</a></li>
       @endif
-        
-        <li class="bg_lr"> <a href="{{ url('/admin/view-chats') }}"> <i class="icon-comment"></i><span class="label label-important">{{$chatlogCount->total()}}</span> Live Chat</a> </li>
+      <li class="bg_lr"> <a href="{{ url('/admin/view-report-farmer') }}"> <i class="icon-bar-chart"></i><span class="label label-important">{{$farmerCount->total()}}</span> Statistics</a> </li>
+
       </ul>
     </div>
 
 <!--End-Action boxes-->    
+
 
 <!--Chart-box-->    
     <div class="row-fluid">

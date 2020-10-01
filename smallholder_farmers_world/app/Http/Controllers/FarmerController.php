@@ -7,6 +7,9 @@ use App\Farmer;
 use App\FarmerProduct;
 use Session;
 use App\UssdNotification;
+use App\Exports\farmersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class FarmerController extends Controller
 {
@@ -186,7 +189,28 @@ class FarmerController extends Controller
         }
         // Farmers drop down end
         return view('admin.farmers.edit_farmer_produce')->with(compact('farmerProduceDetails','farmers_drop_down'));
-    }       
+    }    
+    
+    // Exporting Farmer details
+    public function exportFarmers(){
+        return Excel::download(new farmersExport,'farmers.xlsx');
+    }    
+
+    // View Farmer Charts
+    public function viewFarmerCharts(){
+
+        $current_month_farmers = Farmer::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->count();
+        $last_month_farmers = Farmer::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
+        $last_to_last_month_farmers = Farmer::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
+       
+        
+        return view('admin.farmers.view_farmers_charts')->with(compact('current_month_farmers','last_month_farmers','last_to_last_month_farmers'));;
+        /*
+        
+        return view('admin.users.view_users_charts')->with(compact('current_month_users','last_month_users','last_to_last_month_users'));
+
+        */
+    }
 
     // deleting farmer products
     public function deleteFarmerProduct(Request $request, $id = null){
@@ -196,6 +220,8 @@ class FarmerController extends Controller
             return redirect()->back()->with('flash_message_success','Farmer Product Details Deleted Successfully');
         }
     }
+
+    
 
 
 

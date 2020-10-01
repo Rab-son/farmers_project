@@ -12,6 +12,7 @@
 |
 */
 use App\Orders;
+use App\Farmer;
 /*
 Route::get('/', function () {
     return view('welcome');
@@ -50,7 +51,12 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::match(['get', 'post'], '/admin/delete-farmer-product/{id}', 'FarmerController@deleteFarmerProduct');//Route for deleting farmer produce details 
     Route::get('/admin/check-idnumber', 'FarmerController@checkIdnumber');// Route for checking password
     Route::get('/admin/view-farmers','FarmerController@viewFarmers');// Route for viewing farmer details
+    Route::get('/admin/export-farmers','FarmerController@exportFarmers');// Route for exporting farmer details
     Route::get('/admin/view-farmer-products','FarmerController@viewFarmerProducts');// Route for viewing product details
+    Route::get('/admin/view-report-farmer','FarmerController@viewFarmerCharts');// Route for viewing farmer charts details
+
+
+
 
     // Market Management
     Route::match(['get','post'], '/admin/add-market', 'MarketController@addMarket');// Route for adding a market
@@ -61,6 +67,9 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::match(['get','post'],'/admin/add-items','MarketController@addMarketProduct');// Route for adding product details
     Route::get('/admin/view-markets','MarketController@viewMarkets');// Route for viewing market details
     Route::get('/admin/view-market-products','MarketController@viewMarketProducts');// Route for viewing product details
+    Route::get('/admin/export-markets','MarketController@exportMarkets');// Route for exporting farmer details
+    Route::get('/admin/view-report-market','MarketController@viewMarketCharts');// Route for viewing market charts details
+
 
     //Calculations
     Route::get('/admin/view-calculations','CalculatorController@viewMaizeCalculator');// Route for calculating market details  
@@ -77,15 +86,18 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::match(['get','post'],'/admin/add-product','SupplierController@addSupplierProduct');// Route for add product details
     Route::match(['get', 'post'], '/admin/delete-supplier-product/{id}', 'SupplierController@deleteSupplierProduct');//Route for deleting supplier product 
     Route::get('/admin/view-supplier-products','SupplierController@viewSupplierProducts');// Route for viewing product details
-
     Route::get('/admin/view-suppliers','SupplierController@viewSuppliers');// Route for viewing supplier details
+    Route::get('/admin/view-report-supplier','SupplierController@viewSupplierCharts');// Route for viewing farmer charts details
+
     
     // Advisor Management
     Route::match(['get','post'], '/admin/add-advisor', 'AdvisorController@addAdvisor');// Route for adding a advisor
     Route::match(['get', 'post'], '/admin/edit-advisor/{id}', 'AdvisorController@editAdvisor');// Route for editing advisor details
     Route::match(['get', 'post'], '/admin/delete-advisor/{id}', 'AdvisorController@deleteAdvisor');//Route for deleting advisor details
     Route::get('/admin/view-advisors','AdvisorController@viewAdvisors');// Route for viewing advisorr details
-     
+    Route::get('/admin/view-report-advisor','AdvisorController@viewAdvisorCharts');// Route for viewing farmer charts details
+    
+
     // SMS Portal
     Route::match(['get','post'], '/admin/send-notification', 'UssdNotificationController@sendNotification');// Route for adding a advisor
     Route::match(['get', 'post'], '/admin/edit-notification/{id}', 'UssdNotificationController@editNotification');// Route for editing advisor details
@@ -96,9 +108,7 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::get('/admin/view-enquiries','CmsController@viewEnquiries');// Route to display enquiries
     Route::get('/admin/get-enquiries','CmsController@getEnquiries');// Get Enquiries
 
-    Route::get('/', function () {
-        return Farmers::all();
-    });
+    Route::get('/', 'AdminController@login'); 
 
 
 });

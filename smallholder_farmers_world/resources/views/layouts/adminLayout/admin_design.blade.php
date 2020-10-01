@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="{{asset('css/matrix-media.css')}}" />
 <link rel="stylesheet" href="{{asset('css/bootstrap-wysihtml5.css')}}" />
 <link href="{{asset('font-awesome/css/font-awesome.css')}}" rel="stylesheet" />
+<link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" />
 <link rel="stylesheet" href="{{asset('css/jquery.gritter.css')}}" />
 <link rel="stylesheet" href="{{asset('css/chat.css')}}" />
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,800' rel='stylesheet' type='text/css'>
@@ -48,6 +49,7 @@
     <script src="{{asset('js/jquery.peity.min.js')}}"></script>
     <script src="{{asset('js/bootstrap-wysihtml5.js')}}"></script>
     <script src="{{asset('js/client.js')}}"></script>
+    <script src="{{asset('js/canvasjs.min.js')}}"></script>
     
     <script>
         $('.textarea_editor').wysihtml5();

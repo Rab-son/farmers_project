@@ -10,7 +10,10 @@
       <a title="Go to Dashboard" href="{{ url('/admin/dashboard') }}"><i class="icon icon-dashboard"></i> <span>Dashboard</span></a> </li>
     <!--User Management Section-->
     @if(Session::get('adminDetails')['farmers_access']==1)
-    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-group"></i> <span>Farmers</span> <span class="label label-important">4</span></a>
+    <?php 
+       $base_user_url = trim(basename($url));
+    ?>
+    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-group"></i> <span>Farmers</span> <span class="label label-important">5</span></a>
       <ul <?php if(preg_match("/farme/i", $url)||(preg_match("/add-yield/i", $url))){ ?> style="display:block;" <?php } ?>>
 
         <li <?php if(preg_match("/add-farmer/i", $url)){ ?> class="active" <?php } ?>>
@@ -24,6 +27,9 @@
         <li <?php if(preg_match("/view-farmers/i", $url)){ ?> class="active" <?php } ?>>
         <a href="{{ url('/admin/view-farmers') }}"><i class="icon icon-edit"></i> View Farmer</a></li>
 
+        <li <?php if ($base_user_url=="view-report-farmer"){ ?> class="active" <?php } ?>>
+        <a href="{{ url('/admin/view-report-farmer')}}"><i class="icon icon-signal"></i> View Farmer Chart</a></li>
+
         <li <?php if(preg_match("/view-farmer-products/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/view-farmer-products') }}"><i class="icon icon-edit"></i> View Products</a></li>
 
@@ -32,7 +38,10 @@
     @endif
     <!--Market Management Section-->
     @if(Session::get('adminDetails')['markets_access']==1)
-    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-shopping-cart"></i> <span>Markets</span> <span class="label label-important">4</span></a>
+    <?php 
+       $base_user_url = trim(basename($url));
+    ?>
+    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-shopping-cart"></i> <span>Markets</span> <span class="label label-important">5</span></a>
       <ul <?php if(preg_match("/marke/i", $url)||(preg_match("/add-items/i", $url))){ ?> style="display:block;" <?php } ?>>
         <li <?php if(preg_match("/add-market/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/add-market') }}"><i class="icon icon-plus-sign"></i> Add Market</a></li>
@@ -41,6 +50,9 @@
         <li <?php if(preg_match("/add-items/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/add-items') }}"><i class="icon icon-bookmark"></i> Add Product</a></li>
       </ul>
+
+      <li <?php if ($base_user_url=="view-report-market"){ ?> class="active" <?php } ?>>
+        <a href="{{ url('/admin/view-report-market')}}"><i class="icon icon-signal"></i> View Market Chart</a></li>
 
         <li <?php if(preg_match("/view-markets/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/view-markets') }}"><i class="icon icon-eye-open"></i> View Market</a></li>
@@ -52,18 +64,26 @@
     @endif
     <!--Advisor Management Section-->
     @if(Session::get('adminDetails')['advisors_access']==1)
-    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-qrcode"></i> <span>Advisors</span> <span class="label label-important">2</span></a>
+    <?php 
+       $base_user_url = trim(basename($url));
+    ?>
+    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-qrcode"></i> <span>Advisors</span> <span class="label label-important">3</span></a>
       <ul <?php if(preg_match("/advis/i", $url)){ ?> style="display:block;" <?php } ?>>
         <li <?php if(preg_match("/add-advisor/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/add-advisor') }}"><i class="icon icon-plus"></i> Add Advisor</a></li>
         <li <?php if(preg_match("/view-advisors/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/view-advisors') }}"><i class="icon icon-list-alt"></i> View Advisor</a></li>
+        <li <?php if ($base_user_url=="view-report-advisor"){ ?> class="active" <?php } ?>>
+          <a href="{{ url('/admin/view-report-advisor')}}"><i class="icon icon-signal"></i> View Advisor Chart</a></li>
       </ul>
     </li>
     @endif
     <!--Supplier Management Section-->
     @if(Session::get('adminDetails')['suppliers_access']==1)
-    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-briefcase" ></i> <span>Suppliers</span> <span class="label label-important">4</span></a>
+    <?php 
+       $base_user_url = trim(basename($url));
+    ?>
+    <li class="submenu"> <a title="Add or View" class="tip-bottom" href="#"><i class="icon icon-briefcase" ></i> <span>Suppliers</span> <span class="label label-important">5</span></a>
       <ul <?php if(preg_match("/supplie/i", $url)||(preg_match("/add-product/i", $url))){ ?> style="display:block;" <?php } ?>>
         <li <?php if(preg_match("/add-supplier/i", $url)){ ?> class="active" <?php } ?>>
           <a href="{{ url('/admin/add-supplier') }}"><i class="icon icon-user" ></i> Add Supplier </a></li>
@@ -76,6 +96,9 @@
 
         <li <?php if(preg_match("/view-suppliers/i", $url)){ ?> class="active" <?php } ?>>
         <a href="{{ url('/admin/view-suppliers') }}"><i class="icon icon-book" ></i> View Supplier </a></li>
+
+        <li <?php if ($base_user_url=="view-report-supplier"){ ?> class="active" <?php } ?>>
+          <a href="{{ url('/admin/view-report-supplier')}}"><i class="icon icon-signal" ></i>  View Supplier Chart</a></li>
 
         <li <?php if(preg_match("/view-supplier-products/i", $url)){ ?> class="active" <?php } ?>>
         <a href="{{ url('/admin/view-supplier-products') }}"><i class="icon icon-book" ></i> View Product </a></li>
@@ -104,6 +127,7 @@
       <ul <?php if(preg_match("/enquiries/i", $url)){ ?> style="display:block;" <?php } ?>>
         <li <?php if(preg_match("/view-enquiries/i", $url)){ ?> class="active" <?php } ?>>
         <a href="{{ url('/admin/view-enquiries') }}"><i class="icon icon-question-sign" ></i> View Enquiries</a></li>
+
       </ul>
     </li>
     @endif
@@ -116,6 +140,7 @@
       </ul>
     </li>
     @endif
+
   </ul>
     
 </div>

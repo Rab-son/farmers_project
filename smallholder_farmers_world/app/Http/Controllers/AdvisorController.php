@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Advisor;
+use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class AdvisorController extends Controller
 {
@@ -73,5 +75,18 @@ class AdvisorController extends Controller
     		return redirect()->back()->with('flash_message_success','Advisor Details Deleted Successfully');
     	}
     }
+
+    // View Farmer Charts
+    public function viewAdvisorCharts(){
+
+        $current_month_advisors = Advisor::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->month)->count();
+        $last_month_advisors = Advisor::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(1))->count();
+        $last_to_last_month_advisors = Advisor::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', Carbon::now()->subMonth(2))->count();
+       
+        
+        return view('admin.advisors.view_advisors_charts')->with(compact('current_month_advisors','last_month_advisors','last_to_last_month_advisors'));;
+        
+    }
+
 
 }
