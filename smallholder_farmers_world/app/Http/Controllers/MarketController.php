@@ -40,11 +40,16 @@ class MarketController extends Controller
             if(empty($data['market_id'])){
 				return redirect()->back()->with('flash_message_error','Market Name Is Missing ');    
             }
+            if(empty($data['mark_location'])){
+				return redirect()->back()->with('flash_message_error','Market Location Is Missing ');    
+            }
             if(empty($data['status'])){
                 $data['status'] = 0;
             }
  	   		$product = new MarketProduct;
             $product->market_id = $data['market_id'];
+            $product->mark_location = $data['mark_location'];
+            $product->mark_name = $data['market_id'];
             $product->product_name = $data['product_name']; 
  	   		$product->selling_price = $data['selling_price'];
             $product->amount = $data['amount'];
@@ -64,14 +69,28 @@ class MarketController extends Controller
     	//Categories drop down start
 		$markets = Market::where(['market_parent_id' => 0])->get();
 
-		$markets_drop_down = "<option value='' selected disabled>Select</option>";
+        $markets_drop_down = "<option value='' selected disabled>Select</option>";
+        $markets_drop_list = "<option value='' selected disabled>Select</option>";
 		foreach($markets as $cat){
-			$markets_drop_down .= "<option value='".$cat->mark_id."'>".$cat->mark_name."</option>";
+			$markets_drop_down .= "<option value='".$cat->mark_id." ".$cat->mark_name."'>".$cat->mark_name."</option>";
 			
-		}
-    	// Categories drop down end
+        }
 
-    	return view('admin.markets.add_market_product')->with(compact('markets_drop_down'));
+
+
+        // Categories drop down end
+        
+        foreach($markets as $cat){
+            $markets_drop_list .= "<option value='".$cat->mark_location."'>".$cat->mark_name."</option>";
+            $sub_markets = Market::where(['mark_location'=>$cat->mark_location])->get();
+    		foreach($sub_markets as $sub_mar){
+    			$markets_drop_list .= "<option value = '".$sub_mar->mark_location."'>&nbsp;--&nbsp; ".$sub_mar->mark_location."</option>";
+    		}
+
+			
+        }
+
+    	return view('admin.markets.add_market_product')->with(compact('markets_drop_down','markets_drop_list'));
     }
     
     // Exporting Market details
@@ -128,9 +147,12 @@ class MarketController extends Controller
 		foreach($products as $key =>$val){
             $mark_name = Market::where(['mark_id'=>$val->market_id])->first();
             $products[$key]->mark_name = $mark_name->mark_name;
-		}
+        }
+        $menu_active=3;
+        $i=0;
+        $markets = MarketProduct::orderBy('created_at','desc')->get();
         //echo "<pre>"; print_r($products);die;
-        return view ('admin.markets.view_market_products')->with(compact('products'));
+        return view ('admin.markets.view_market_products')->with(compact('products','menu_active','i'));
     }
     // edit market product
     public function editMarketProduct(Request $request, $id=null){

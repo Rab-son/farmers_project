@@ -86,8 +86,14 @@ class SupplierController extends Controller
             if(empty($data['status'])){
                 $data['status'] = 0;
             }
+            if(empty($data['supplier_location'])){
+				return redirect()->back()->with('flash_message_error','Supplier Location Is Missing ');    
+            }
+
  	   		$product = new SupplierProduct;
- 	   		$product->supplier_id = $data['supplier_id'];
+            $product->supplier_id = $data['supplier_id'];
+            $product->supplier_location = $data['supplier_location']; 
+            $product->supplier_name = $data['supplier_id'];    
  	   		$product->product_name = $data['product_name'];
             $product->selling_price = $data['selling_price'];
             $product->status = $data['amount'];
@@ -105,15 +111,30 @@ class SupplierController extends Controller
 
     	//Categories drop down start
 		$suppliers = Supplier::where(['supplier_parent_id' => 0])->get();
-
-		$suppliers_drop_down = "<option value='' selected disabled>Select</option>";
+        $suppliers_drop_down = "<option value='' selected disabled>Select</option>";
+        $suppliers_drop_list = "<option value='' selected disabled>Select</option>";
+       
 		foreach($suppliers as $cat){
-			$suppliers_drop_down .= "<option value='".$cat->id."'>".$cat->supplier_name."</option>";
+            $suppliers_drop_down .= "<option value='".$cat->id." ".$cat->$supplier_name." '>".$cat->supplier_name."</option>";
 			
-		}
+        }
+
+		foreach($suppliers as $cat){
+            $suppliers_drop_list .= "<option value='".$cat->supplier_location."'>".$cat->supplier_name."</option>";
+            $sub_suppliers = Supplier::where(['supplier_location'=>$cat->supplier_location])->get();
+    		foreach($sub_suppliers as $sub_sup){
+    			$suppliers_drop_list .= "<option value = '".$sub_sup->supplier_location."'>&nbsp;--&nbsp; ".$sub_sup->supplier_location."</option>";
+    		}
+			
+        }
+        $menu_active=3;
+        $i=0;
+        $markets = SupplierProduct::orderBy('created_at','desc')->get();
+        //echo "<pre>"; print_r($products);die;
+    
     	// Categories drop down end
 
-    	return view('admin.suppliers.add_supplier_product')->with(compact('suppliers_drop_down'));
+    	return view('admin.suppliers.add_supplier_product')->with(compact('suppliers_drop_down','suppliers_drop_list','menu_active','i'));
     }
     // View Supplier Product
     public function viewSupplierProducts(Request $request){

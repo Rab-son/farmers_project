@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UssdNotification;
 use App\Farmer;
 use Session;
+use Auth;
 
 class UssdNotificationController extends Controller
 {
@@ -36,12 +37,12 @@ class UssdNotificationController extends Controller
 
     	//Categories drop down start
     	$farmers = Farmer::where(['parent_id'=>0])->get();
-    	$farmers_dropdown = "<option value='' selected disabled>Select</option>";
+    	$farmers_dropdown = "<option selected disabled>Select</option>";
     	foreach($farmers as $far){
-    		$farmers_dropdown .= "<option value='".$far->id."'>".$far->phonenumber."</option>";
-    		$sub_farmers = Farmer::where(['parent_id'=>$far->id])->get();
+    		$farmers_dropdown .= "<option value='".$far->id."'>".$far->full_name."</option>";
+    		$sub_farmers = Farmer::where(['id'=>$far->id])->get();
     		foreach($sub_farmers as $sub_far){
-    			$farmers_dropdown .= "<option value = '".$sub_far->id."'>&nbsp;--&nbsp;".$sub_far->phonenumber."</option>";
+    			$farmers_dropdown .= "<option value = '".$sub_far->id."'>&nbsp;--&nbsp; ".$sub_far->phonenumber."</option>";
     		}
     	}
     	// Categories drop down end

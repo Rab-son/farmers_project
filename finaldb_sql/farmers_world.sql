@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 01, 2020 at 04:56 PM
+-- Generation Time: Oct 30, 2020 at 02:21 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.26
 
@@ -66,7 +66,8 @@ INSERT INTO `admins` (`id`, `username`, `password`, `type`, `farmers_access`, `a
 (30, 'kondwanlusinje@gmail.com', '7717dca1543a25f26c3c40d28865d638', 'Admin', 0, 0, 0, 0, 0, 1, '2020-09-23 21:52:47', '2020-09-23 21:54:43'),
 (31, 'testing@gmail.com', '7717dca1543a25f26c3c40d28865d638', 'Sub Admin', 1, 0, 0, 0, 1, 1, '2020-09-29 22:12:08', '2020-09-29 22:12:58'),
 (32, 'advisormarket@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Sub Admin', 0, 1, 0, 0, 1, 1, '2020-09-29 22:39:14', '2020-09-29 22:40:13'),
-(33, 'test@gmail.com', '7717dca1543a25f26c3c40d28865d638', 'Sub Admin', 1, 0, 0, 0, 1, 1, '2020-10-01 18:06:20', '2020-10-01 18:06:49');
+(33, 'test@gmail.com', '7717dca1543a25f26c3c40d28865d638', 'Sub Admin', 1, 0, 0, 0, 1, 1, '2020-10-01 18:06:20', '2020-10-01 18:06:49'),
+(34, 'rabsonsayendajnrkk@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', 'Sub Admin', 1, 1, 1, 1, 1, 0, '2020-10-02 16:11:28', '2020-10-02 16:23:46');
 
 -- --------------------------------------------------------
 
@@ -93,7 +94,10 @@ CREATE TABLE `advisors` (
 --
 
 INSERT INTO `advisors` (`id`, `advisor_name`, `specialty`, `phone_number`, `advisor_location`, `days`, `start_time`, `end_time`, `status`, `created_at`, `updated_at`) VALUES
-(6, 'Kondwani Lusinje', 'Crop Production', '0888799122', 'LIlongwe', 'Monday', '10AM', '12PM', '1', '2020-09-29 18:52:15', '2020-09-29 18:52:15');
+(9, 'Hopson Gausi', 'Home Science', '088879913277', 'Chitipa', 'Monday', '10', '12', '1', '2020-10-24 13:52:46', '2020-10-24 14:28:58'),
+(10, 'Taurai Gombera', 'Home Science', '0888654734', 'Blantyre', 'Monday', '10', '12PM', '1', '2020-10-24 14:31:11', '2020-10-24 14:31:11'),
+(11, 'Usher Ray', 'Home Science', '0888799123', 'Mzimba', 'Monday', '10', '12', '1', '2020-10-24 14:32:36', '2020-10-24 14:32:36'),
+(13, 'Rabson Moyenda', 'Home Science', '0888799122', 'Zomba', 'Monday', '10', '12', '1', '2020-10-25 22:48:09', '2020-10-25 22:48:09');
 
 -- --------------------------------------------------------
 
@@ -159,7 +163,14 @@ INSERT INTO `farmers` (`id`, `parent_id`, `full_name`, `id_number`, `birthday_da
 (99, 0, 'Laston Nyasulu', 'bsd/20/120', '1999-03-01', 'Rumphi', '1', '+265999799102', 'Gift Soko', 'Crop Production', 'Not Available', NULL, '2020-09-29 17:02:24', '2020-10-01 22:38:43'),
 (100, 0, 'Mwayi Massi', 'soc/87/124', '1999-03-01', 'Zomba', '1', '+265888710122', 'Omega Kamba', 'Poultry Farming', 'Not Available', NULL, '2020-09-29 17:03:45', '2020-10-01 22:38:29'),
 (118, 0, 'Rabson Sayenda', 'uuutu5613', '1917-08-06', 'Lilongwe', '1', '+265888700122', 'Llyod Giga', 'crop production', 'Not Available', NULL, '2020-09-30 13:37:12', '2020-10-01 22:38:15'),
-(119, 0, 'Rabson Sayenda', 'uuutu', '1917-08-01', 'Zomba', '1', '+265888799622', 'Gift Soko', 'crop production', 'Not Available', NULL, '2020-09-30 13:37:47', '2020-10-01 22:37:10');
+(119, 0, 'Rabson Sayenda', 'uuutu', '1917-08-01', 'Zomba', '1', '+265888799622', 'Gift Soko', 'crop production', 'Not Available', NULL, '2020-09-30 13:37:47', '2020-10-01 22:37:10'),
+(193, 0, 'BBB', 'bbb', '0000-00-00', 'bbb', NULL, '+265889799210', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-02 14:17:05', '2020-10-02 14:17:05'),
+(195, 0, 'MMM', 'nnn', '0000-00-00', 'nnn', NULL, '+265776788210', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-02 14:29:11', '2020-10-02 14:29:11'),
+(196, 0, '2fjajjfa', 'Lilongwe123', '0000-00-00', 'Lilongwe', NULL, '09081100989', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-24 07:44:35', '2020-10-24 07:44:35'),
+(198, 0, 'Kondwani Banda', 'bbbb', '0000-00-00', '', NULL, '+265887888221', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-27 07:39:28', '2020-10-27 07:39:28'),
+(199, 0, 'Mulungu Dosi', 'hh', '0000-00-00', '', NULL, '+265998876210', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-27 07:42:13', '2020-10-27 07:42:13'),
+(200, 0, 'NNN', 'JJJ', '0000-00-00', 'JJJ', NULL, '+265999805678', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-27 08:16:01', '2020-10-27 08:16:01'),
+(202, 0, 'Islam Zomba', 'IIIII', '0000-00-00', 'Lilongwe', NULL, '+265888705888', 'Not Assigned', 'Not Assigned', 'Not Available', NULL, '2020-10-29 11:45:00', '2020-10-29 11:45:00');
 
 -- --------------------------------------------------------
 
@@ -228,6 +239,8 @@ INSERT INTO `markets` (`mark_id`, `market_parent_id`, `mark_name`, `mark_locatio
 CREATE TABLE `market_products` (
   `id` int(10) UNSIGNED NOT NULL,
   `market_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mark_location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mark_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Assigned',
   `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `selling_price` double(8,2) NOT NULL DEFAULT 0.00,
   `buying_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Available',
@@ -242,9 +255,12 @@ CREATE TABLE `market_products` (
 -- Dumping data for table `market_products`
 --
 
-INSERT INTO `market_products` (`id`, `market_id`, `product_name`, `selling_price`, `buying_price`, `description`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(11, '23', 'Maize', 15000.00, '10000', '70Kgs of quality maize bags', '20', 1, '2020-09-29 18:39:19', '2020-09-29 18:42:33'),
-(12, '23', 'Goat', 10000.00, '100', 'Health goat for milk production', '100', 0, '2020-09-29 18:41:32', '2020-09-29 18:41:32');
+INSERT INTO `market_products` (`id`, `market_id`, `mark_location`, `mark_name`, `product_name`, `selling_price`, `buying_price`, `description`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(23, '23 Agrocomm Trade Limited', 'chitipa', '23 Agrocomm Trade Limited', 'Chimanga', 101.00, '101', 'hfhaf', '101', 1, '2020-10-26 19:47:10', '2020-10-26 19:47:10'),
+(24, '22 Annes Investments', 'chitipa', '22 Annes Investments', 'Maize Bags', 101.00, '101', 'jjj', '10', 1, '2020-10-26 19:48:55', '2020-10-26 19:48:55'),
+(25, '33 Kangachepe Agrodealer', 'Zomba', '33 Kangachepe Agrodealer', 'Chimanga', 10.00, '10', 'jjj', '10', 1, '2020-10-26 19:51:12', '2020-10-26 19:51:12'),
+(26, '25 Admarc Blantyre', 'Blantyre', '25 Admarc Blantyre', 'Maize Bags', 10.00, '10', 'fffff', '10', 1, '2020-10-26 19:55:54', '2020-10-26 19:55:54'),
+(27, '26 Agora', 'Liwonde', '26 Agora', 'Chimanga', 101.00, '10', 'jjjj', '10', 1, '2020-10-26 21:22:29', '2020-10-26 21:22:29');
 
 -- --------------------------------------------------------
 
@@ -370,7 +386,84 @@ INSERT INTO `session` (`session_id`, `phonenumber`, `level`) VALUES
 ('ATUid_4ff7bf0169d68c7d144c9413d5bf8296', '+265888905666', 1),
 ('ATUid_3968f863b8a67a5057ed688432248ba7', '+265881404368', 4),
 ('ATUid_590ac820337c1b6ac7d6e1c3ca8ae197', '+265881404368', 8),
-('ATUid_a1373450cd24059b7898c40a3006a9ce', '+265881404368', 15);
+('ATUid_a1373450cd24059b7898c40a3006a9ce', '+265881404368', 15),
+('ATUid_de8a27133ef4a28124a657b9a0eb3f2c', '+265889799210', 0),
+('ATUid_ab7e3bfe3ae9e573ffbaafa57fe3b04b', '+265889799210', 30),
+('ATUid_4bdb9bac3efe4f05a239b438ddf5dcec', '+265887622910', 1),
+('ATUid_1e510dc59c7ee59a5cbb1d3f5ccce387', '+265776788210', 0),
+('ATUid_918bc747e7a2f0d0fd702ea0199695c9', '+265776788210', 17),
+('1', '09081100989', 0),
+('2', '09081100989', 9),
+('3', '09081100989', 16),
+('ATUid_c36f1a68b5b0b3c77ee79e0c557f17ea', '+265887877210', 0),
+('ATUid_3cf70b87bd24841384eb88f033281e34', '+265887877210', 23),
+('ATUid_c199175822cf46c60b64581377bbc0b8', '+265887877210', 2),
+('ATUid_7a6f8d1e3ab7283139c8a243e4b461d4', '+265887877210', 16),
+('ATUid_9a06ba0f7cbc773d6edc705462c2cdba', '+265887877210', 15),
+('ATUid_ad03d37d2c33a3feb138447dc8c4fc33', '+265887877210', 2),
+('ATUid_dd53fb4fd3017808e316519a77cebfd0', '+265887877210', 23),
+('ATUid_829153fe1613b555f656b82edbe5f331', '+265887877210', 23),
+('ATUid_ec511d03f5257c349c2843ecd9084e36', '+265887888221', 0),
+('ATUid_e752d64bab65b14c5d75587ca0404d9b', '+265887888221', 30),
+('ATUid_88754ec588ec2085ed6b9808872c2987', '+265887888221', 3),
+('ATUid_69d687c3ceae0c8ee5561fe4ef48bbd6', '+265887888221', 30),
+('ATUid_f44076c5b5a5f703e829a660fe6c0e2a', '+265887888221', 2),
+('ATUid_f680630ccec29592d61b7de2f744428f', '+265998876210', 0),
+('ATUid_9ed74fc2379229c9ed8fc0f49388d6ba', '+265998876210', 8),
+('ATUid_d6976b40b0c9f5e0d1005e1961b0670d', '+265998876210', 1),
+('ATUid_7d4153f893adc032c31dee01ea400491', '+265998876210', 16),
+('ATUid_ea6f32e4e0bbab74775e6b9386162eeb', '+265998876210', 1),
+('ATUid_2b28b18e1b7eee6f7ea2776e20239a7f', '+265998876210', 16),
+('ATUid_d981a94382e117bea8bc8540d849b84e', '+265998876210', 16),
+('ATUid_558acc91f153b347c6a781bb0e38d53b', '+265998876210', 2),
+('ATUid_1be137f29a3becf9bc5bfd22b7ad49a1', '+265998876210', 12),
+('ATUid_f1afdd636f1ba17664a058bbd4b8580e', '+265998876210', 12),
+('ATUid_8868d443e0bf720af607268f7b408129', '+265998876210', 1),
+('ATUid_5e9aa54af8a57bb494d2ec4f17ac352c', '+265998876210', 1),
+('ATUid_b3d5293fd86684e0b3b2210bf54f4cb0', '+265998876210', 1),
+('ATUid_fc8973c426d3e157983abb7fecb99686', '+265998876210', 25),
+('ATUid_117d8197568822c0db74a7a4a841e0ce', '+265998876210', 2),
+('ATUid_cb46fc115767a5c29ba7fe2de5776eb2', '+265998876210', 14),
+('ATUid_83bbafd4b6918365e33392f690a0eaa0', '+265998876210', 10),
+('ATUid_83f89c0819706d96ab491718d309c746', '+265998876210', 23),
+('ATUid_07adf9c925d3a6aabfd74fdbb5ce185c', '+265998876210', 13),
+('ATUid_068e8a3f9174134b3e23656772b56889', '+265998876210', 16),
+('ATUid_c32c7f4f4117f1887b8b0ad9fcc64e49', '+265998876210', 16),
+('ATUid_f90e03f938e8bcb4c01c95b717a9f08f', '+265998876210', 15),
+('4', '09081100989', 16),
+('10', '09081100989', 5),
+('9', '09081100989', 16),
+('ATUid_d5ad5522b1b4dbfa34231d86987a851e', '+265999805678', 1),
+('ATUid_7fb2df344aeb9c7057609d422a3dfe72', '+265999805678', 0),
+('ATUid_091058877004f92696f2948f210372a0', '+265999805678', 16),
+('ATUid_f5620a0f4bbd6ddf042ee68a8734f8e7', '+265999805678', 5),
+('ATUid_4dc2d2ca908317d6401996014d234f26', '+265888705888', 0),
+('ATUid_bbc97eeee9d8a584711c1186f14a2d49', '+265888705888', 2),
+('ATUid_7a68bfdf7c70e1a296e78203290c9eb5', '+265888705888', 2),
+('ATUid_cfa1a324b0b72a60f14c634bd2909826', '+265888705888', 6),
+('ATUid_dfa113667dc808ad62e013d6b34d9fc8', '+265888705888', 8),
+('ATUid_fe067e627c47f84c8dffd86dae57b762', '+265888705888', 17),
+('ATUid_d7a1959d07c56a2d61689f86cf64390b', '+265888705888', 2),
+('ATUid_181529b6351715109c81c975f8237310', '+265888705888', 6),
+('ATUid_c04716e4520fb43533dac861c19f6c35', '+265888705888', 8),
+('ATUid_c05222d7acbcd6525bef583c5c2fb855', '+265888705888', 1),
+('ATUid_c5ce9babfda3fe94153b2ccebaffea0e', '+265888705888', 7),
+('ATUid_c305ebe0b6158aaaf7fff0f744915ea5', '+265888705888', 8),
+('ATUid_35dabfac171d21d16b66868eb8362b9a', '+265888705888', 1),
+('ATUid_9f05f9e78149976f3761dcd7bcaea94b', '+265888705888', 7),
+('ATUid_b38aaa22b5b09fbf685e430c3c36c03a', '+265888705888', 8),
+('ATUid_7b4d6919d3a5d0b8728dba34a9752bb0', '+265888705888', 15),
+('ATUid_9fb03b79e81aeecd263eee343fb5e4e4', '+265888705888', 7),
+('ATUid_708fca3d5edabdad2e160e2c018efc40', '+265888705888', 5),
+('11', '09081100989', 5),
+('12', '09081100989', 68),
+('13', '09081100989', 68),
+('14', '09081100989', 68),
+('16', '09081100989', 68),
+('17', '09081100989', 68),
+('18', '09081100989', 69),
+('19', '09081100989', 16),
+('20', '09081100989', 16);
 
 -- --------------------------------------------------------
 
@@ -420,7 +513,9 @@ INSERT INTO `suppliers` (`id`, `supplier_name`, `supplier_parent_id`, `supplier_
 
 CREATE TABLE `supplier_products` (
   `id` int(10) UNSIGNED NOT NULL,
-  `supplier_id` int(255) NOT NULL,
+  `supplier_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `supplier_location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Assigned',
+  `supplier_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Not Assigned',
   `product_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `selling_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -434,8 +529,8 @@ CREATE TABLE `supplier_products` (
 -- Dumping data for table `supplier_products`
 --
 
-INSERT INTO `supplier_products` (`id`, `supplier_id`, `product_name`, `selling_price`, `description`, `amount`, `status`, `created_at`, `updated_at`) VALUES
-(5, 23, 'Chimanga', '15000', 'Rabson Sayenda', 0.00, 1, '2020-09-30 02:16:57', '2020-09-30 02:16:57');
+INSERT INTO `supplier_products` (`id`, `supplier_id`, `supplier_location`, `supplier_name`, `product_name`, `selling_price`, `description`, `amount`, `status`, `created_at`, `updated_at`) VALUES
+(13, '20 Annes Investments', 'Lilongwe', '20 Annes Investments', 'fbbfa', '10', 'fnnfaf', 0.00, 1, '2020-10-26 23:06:18', '2020-10-26 23:06:18');
 
 -- --------------------------------------------------------
 
@@ -629,13 +724,13 @@ ALTER TABLE `ussd_notifications`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `advisors`
 --
 ALTER TABLE `advisors`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `enquiries`
@@ -647,7 +742,7 @@ ALTER TABLE `enquiries`
 -- AUTO_INCREMENT for table `farmers`
 --
 ALTER TABLE `farmers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=203;
 
 --
 -- AUTO_INCREMENT for table `farmer_products`
@@ -665,7 +760,7 @@ ALTER TABLE `markets`
 -- AUTO_INCREMENT for table `market_products`
 --
 ALTER TABLE `market_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -683,7 +778,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `supplier_products`
 --
 ALTER TABLE `supplier_products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -701,7 +796,7 @@ ALTER TABLE `users_phone_number`
 -- AUTO_INCREMENT for table `ussd_notifications`
 --
 ALTER TABLE `ussd_notifications`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

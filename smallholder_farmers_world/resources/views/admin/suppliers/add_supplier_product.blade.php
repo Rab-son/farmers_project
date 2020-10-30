@@ -42,6 +42,14 @@
                 </div>
               </div>
               <div class="control-group">
+                <label class="control-label">Supplier Location</label>
+                <div class="controls">
+                  <select name="supplier_location" id="supplier_location" style="width: 590px;">
+                    <?php echo $suppliers_drop_list; ?>
+                  <select>
+                </div>
+              </div>
+              <div class="control-group">
                 <label class="control-label">Product Name</label>
                 <div class="controls">
                   <input type="text" name="product_name" id="product_name" style="width: 578px;">
