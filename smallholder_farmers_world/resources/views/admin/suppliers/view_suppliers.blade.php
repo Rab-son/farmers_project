@@ -34,7 +34,8 @@
                   <th>Number</th>
                   <th>Name</th>
                   <th>Phone Number</th>
-                  <th>Location</th>
+                  <th>EPA Name</th>
+                  <th>District</th>
                   <th>Working Hours</th>
                   <th>Working Days</th>
                   <th>Actions</th>
@@ -47,7 +48,8 @@
                   <td style="text-align: center"> {{ $i}} </td>
                   <td style="text-align: center"> {{ $supplier->supplier_name }}</td>
                   <td style="text-align: center"> {{ $supplier->supplier_phonenumber }}</td>
-                  <td style="text-align: center"> {{ $supplier->supplier_location }}</td>
+                  <td style="text-align: center"> {{ $supplier->supplier_epa }}</td>
+                  <td style="text-align: center"> {{ $supplier->districtname }}</td>
                   <td style="text-align: center"> {{ $supplier->working_hour }}</td>
                   <td style="text-align: center"> {{ $supplier->working_day }}</td>
                   <td style="text-align: center"> 

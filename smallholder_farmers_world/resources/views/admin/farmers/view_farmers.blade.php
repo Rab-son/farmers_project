@@ -36,7 +36,8 @@
                 <tr>
                   <th>Number</th>
                   <th>Farmer Name</th>
-                  <th>Location</th>
+                  <th>EPA Name</th>
+                  <th>District</th>
                   <th>Phone Number</th>
                   <th>Farmer ID Number</th>
                   <th>Farm Activity</th>
@@ -51,7 +52,8 @@
                 <tr class="gradeX">
                   <td style="text-align: center"> {{ $i}}  </td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $farmer->full_name }}</td>
-                  <td style="text-align: center; text-transform: capitalize"> {{ $farmer->location }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $farmer->farmer_epa }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $farmer->districtname }}</td>
                   <td style="text-align: center">  {{ $farmer->phonenumber }}</td>
                   <td style="text-align: center; text-transform: uppercase"> {{ $farmer->id_number }}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $farmer->farm_activity }}</td>

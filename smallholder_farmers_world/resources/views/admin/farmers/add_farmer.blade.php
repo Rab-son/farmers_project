@@ -47,10 +47,24 @@
                   <input type="text" name="id_number" id="id_number" placeholder="e.g BHG4....">
                 </div>
               </div>
-              <div class="control-group">
+              <div class="control-group"> 
                 <label class="control-label">District</label>
                 <div class="controls">
-                  <input type="text" name="location" id="location" placeholder="e.g Zomba">
+                  <select style="width : 220px;" name="district_id" class="districtname" id="district_id">
+                      <option value="0" disabled selected>District Name</option>
+                      @foreach($district as $cat)
+		                	  <option value="{{$cat->id}}">{{ucfirst($cat->districtname)}}</option>
+		                  @endforeach
+
+                  </select>
+                </div>
+              </div>
+              <div class="control-group"> 
+                <label class="control-label">EPA</label>
+                <div class="controls">
+                  <select style="width : 220px;" name="epaname" id="epaname">
+                  <option value="0" disabled selected>EPA Name</option>
+                  </select>
                 </div>
               </div>
 <!--

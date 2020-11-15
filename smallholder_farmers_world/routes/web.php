@@ -24,6 +24,7 @@ Route::match(['get','post'],'/admin/admin-register','AdminController@adminRegist
 Route::get('/admin/adminLogin-register','AdminController@adminLoginRegister');// Route for admin login registration
 Route::get('/logout','AdminController@logout');// Route for admin logout
 
+
 //Securing dashboard routes using middleware
 Route::group(['middleware' => ['adminlogin']], function(){
     // Adminstrator Management
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::get('/admin/view-market-products','MarketController@viewMarketProducts');// Route for viewing product details
     Route::get('/admin/export-markets','MarketController@exportMarkets');// Route for exporting farmer details
     Route::get('/admin/view-report-market','MarketController@viewMarketCharts');// Route for viewing market charts details
+    Route::get('/admin/GetSubCatAgainstMainCatEdit/{id}', 'MarketController@GetSubCatAgainstMainCatEdit');
 
 
     //Calculations

@@ -36,7 +36,8 @@
                   <th>Advisor Name</th>
                   <th>Specialty</th>
                   <th>Phone Number</th>
-                  <th>Location</th>
+                  <th>APA Name</th>
+                  <th>District</th>
                   <th>Working Days</th>
                   <th>Working Hours</th>
                   <th>Status</th>
@@ -51,7 +52,8 @@
                   <td style="text-align: center"> {{ $advisor->advisor_name }}</td>
                   <td style="text-align: center"> {{ $advisor->specialty }}</td>
                   <td style="text-align: center">+ {{ $advisor->phone_number }}</td>
-                  <td style="text-align: center"> {{ $advisor->advisor_location }}</td>
+                  <td style="text-align: center"> {{ $advisor->advisor_epa }}</td>
+                  <td style="text-align: center"> {{ $advisor->districtname }}</td>
                   <td style="text-align: center"> {{ $advisor->days }}</td>
                   <td style="text-align: center"> {{ $advisor->start_time }} To {{ $advisor->end_time }} </td>
                   <td style="text-align: center">  @if ($advisor->status==1)

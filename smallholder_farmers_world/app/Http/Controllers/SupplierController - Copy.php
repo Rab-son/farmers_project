@@ -6,14 +6,21 @@ use Illuminate\Http\Request;
 use Session;
 use App\SupplierProduct;
 use App\Supplier;
+use App\District;
+use App\EPAs;
+use DB;
 use App\Exports\farmersExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
 
 class SupplierController extends Controller
 {
+    public function GetSubCatAgainstMainCatEdit($id){
+        echo json_encode(DB::table('epas')->where('district_id', $id)->get());
+    }
     // Adding Supplier to the system
     public function addSupplier(Request $request){
+        $district=District::all();
         if(Session::get('adminDetails')['suppliers_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
@@ -22,14 +29,17 @@ class SupplierController extends Controller
             $supplier = new Supplier;
             $supplier->working_day = $data['working-day'];
     		$supplier->supplier_name  = $data['supplier_name'];
-            $supplier->supplier_location  = $data['supplier_location'];
+            //$supplier->supplier_location  = $data['supplier_location'];
+            $supplier->supplier_district = $data['districtname'];
+            $supplier->supplier_epa = $data['epaname'];
             $supplier->supplier_phonenumber  = $data['supplier_phonenumber'];
             $supplier->working_hour  = $data['working_hour'];
             $supplier->save();
             return redirect('/admin/view-suppliers')->with('flash_message_success','Supplier Details Added Successfully');
-
         } 
-        return view('admin.suppliers.add_supplier');
+
+        
+        return view('admin.suppliers.add_supplier')->with(compact('district'));
     }
 
     // Displaying Supplier in the system
@@ -40,6 +50,20 @@ class SupplierController extends Controller
         $menu_active=3;
         $i=0;
         $suppliers = Supplier::orderBy('created_at','desc')->get();
+
+
+        $suppliers = json_decode(json_encode($suppliers));
+        /*
+    	foreach($suppliers as $key => $val){
+    		$epaname = epas::where(['ep_id'=>$val->supplier_epa])->first();
+    		$suppliers[$key]->epaname = $epaname->epaname;
+        }
+        */
+        foreach($suppliers as $key => $val){
+    		$districtname = District::where(['id'=>$val->supplier_district])->first();
+    		$suppliers[$key]->districtname = $districtname->districtname;
+        }
+
         return view('admin.suppliers.view_suppliers')->with(compact('suppliers','menu_active','i'));
     }
 
@@ -72,6 +96,7 @@ class SupplierController extends Controller
     }
     // Add Supplier Product
     public function addSupplierProduct(Request $request){
+        $district=District::all();
 		/*
 		if(Session::get('adminDetails')['ussd_notifications_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
@@ -86,13 +111,12 @@ class SupplierController extends Controller
             if(empty($data['status'])){
                 $data['status'] = 0;
             }
-            if(empty($data['supplier_location'])){
-				return redirect()->back()->with('flash_message_error','Supplier Location Is Missing ');    
-            }
 
  	   		$product = new SupplierProduct;
             $product->supplier_id = $data['supplier_id'];
-            $product->supplier_location = $data['supplier_location']; 
+            //$product->supplier_location = $data['supplier_location']; 
+            $product->product_district = $data['district_id'];
+            $product->product_epa = $data['epaname'];
             $product->supplier_name = $data['supplier_id'];    
  	   		$product->product_name = $data['product_name'];
             $product->selling_price = $data['selling_price'];
@@ -115,39 +139,34 @@ class SupplierController extends Controller
         $suppliers_drop_list = "<option value='' selected disabled>Select</option>";
        
 		foreach($suppliers as $cat){
-            $suppliers_drop_down .= "<option value='".$cat->id." ".$cat->$supplier_name." '>".$cat->supplier_name."</option>";
+            $suppliers_drop_down .= "<option value='".$cat->id." ".$cat->supplier_name." '>".$cat->supplier_name."</option>";
 			
         }
 
-		foreach($suppliers as $cat){
-            $suppliers_drop_list .= "<option value='".$cat->supplier_location."'>".$cat->supplier_name."</option>";
-            $sub_suppliers = Supplier::where(['supplier_location'=>$cat->supplier_location])->get();
-    		foreach($sub_suppliers as $sub_sup){
-    			$suppliers_drop_list .= "<option value = '".$sub_sup->supplier_location."'>&nbsp;--&nbsp; ".$sub_sup->supplier_location."</option>";
-    		}
-			
-        }
-        $menu_active=3;
-        $i=0;
-        $markets = SupplierProduct::orderBy('created_at','desc')->get();
-        //echo "<pre>"; print_r($products);die;
-    
-    	// Categories drop down end
 
-    	return view('admin.suppliers.add_supplier_product')->with(compact('suppliers_drop_down','suppliers_drop_list','menu_active','i'));
+		
+
+    	return view('admin.suppliers.add_supplier_product')->with(compact('suppliers_drop_down','district'));
     }
     // View Supplier Product
     public function viewSupplierProducts(Request $request){
-		$products = SupplierProduct::get();
+        $products = SupplierProduct::orderBy('created_at','desc')->get();
+        
         foreach($products as $key =>$val){
             $supplier_name = Supplier::where(['id'=>$val->supplier_id])->first();
             $products[$key]->supplier_name = $supplier_name->supplier_name;
         }
+
         foreach($products as $key =>$val){
             $supplier_location = Supplier::where(['id'=>$val->supplier_id])->first();
             $products[$key]->supplier_location = $supplier_location->supplier_location;
-		}
-        return view ('admin.suppliers.view_supplier_products')->with(compact('products'));
+        }
+        $menu_active=3;
+        $i=0;
+        $suppliers = SupplierProduct::orderBy('created_at','desc')->get();
+
+
+        return view ('admin.suppliers.view_supplier_products')->with(compact('products','menu_active','i'));
 	}
     // edit supplier product
     public function editSupplierProduct(Request $request, $id=null){

@@ -8,7 +8,31 @@ $(document).ready(function(){
 		}else{
 			$("#access").show();
 		}
-	})
+	});
+	
+	$('#district_id').on('change', function () {
+		let id = $(this).val();
+		$('#epaname').empty();
+		$('#epaname').append(`<option value="0" disabled selected>Processing...</option>`);
+		$.ajax({
+		type: 'GET',
+		url: '/admin/GetSubCatAgainstMainCatEdit/' + id,
+		success: function (response) {
+		console.log('failing');
+		var response = JSON.parse(response);
+		console.log(response);   
+		$('#epaname').empty();
+		$('#epaname').append(`<option value="0" disabled selected>Select EPA Name</option>`);
+		response.forEach(element => {
+				$('#epaname').append(`<option value="${element['epaname']}">${element['epaname']}</option>`);
+
+				});
+		}
+		
+});
+});
+
+	
 
 
 	$("#current_pwd").keyup(function(){
@@ -28,6 +52,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
 	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
@@ -62,6 +87,8 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+
+	
 
 	// Add Farmer Validation
     $("#add_farmer").validate({
