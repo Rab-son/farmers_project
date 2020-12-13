@@ -37,6 +37,10 @@ class AdvisorController extends Controller
             $advisor->phone_number = $data['phone_number'];
             $advisor->advisor_district = $data['district_id'];
             $advisor->advisor_epa = $data['epaname'];
+<<<<<<< HEAD
+=======
+           // $advisor->advisor_location = $data['advisor_location'];
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
             $advisor->days  = $data['days'];
             $advisor->start_time = $data['start_time'];
             $advisor->end_time = $data['end_time'];

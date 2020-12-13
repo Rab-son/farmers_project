@@ -76,6 +76,10 @@ class MarketController extends Controller
             
  	   		$product = new MarketProduct;
             $product->market_id = $data['market_id'];
+<<<<<<< HEAD
+=======
+            //$product->mark_location = $data['mark_location'];
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
             $product->product_district = $data['district_id'];
             $product->product_epa = $data['epaname'];
             $product->mark_name = $data['market_id'];

@@ -24,6 +24,17 @@ $(document).ready(function(){
 		$('#epaname').append(`<option value="0" disabled selected>Select EPA Name</option>`);
 		response.forEach(element => {
 				$('#epaname').append(`<option value="${element['epaname']}">${element['epaname']}</option>`);
+<<<<<<< HEAD
+=======
+
+				});
+		}
+		
+});
+});
+
+	
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
 
 				});
 		}
@@ -52,6 +63,7 @@ $("#current_pwd").keyup(function(){
 	});
 });
 
+	
 	
 	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();

@@ -57,6 +57,17 @@
 		                  @endforeach
 
                   </select>
+<<<<<<< HEAD
+=======
+                </div>
+              </div>
+              <div class="control-group"> 
+                <label class="control-label">EPA</label>
+                <div class="controls">
+                  <select style="width : 220px;" name="epaname" id="epaname">
+                  <option value="0" disabled selected>EPA Name</option>
+                  </select>
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
                 </div>
               </div>
               <div class="control-group"> 

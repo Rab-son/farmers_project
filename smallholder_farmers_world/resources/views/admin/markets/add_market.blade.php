@@ -50,7 +50,11 @@
               <div class="control-group"> 
                 <label class="control-label">EPA</label>
                 <div class="controls">
+<<<<<<< HEAD
                   <select style="width : 220px;" name="epaname" id="epaname" type="epa">
+=======
+                  <select style="width : 220px;" name="epaname" id="epaname">
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
                   <option value="0" disabled selected>EPA Name</option>
                   </select>
                 </div>

@@ -36,6 +36,10 @@ class SupplierController extends Controller
             $supplier = new Supplier;
             $supplier->working_day = $data['working-day'];
     		$supplier->supplier_name  = $data['supplier_name'];
+<<<<<<< HEAD
+=======
+            //$supplier->supplier_location  = $data['supplier_location'];
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
             $supplier->supplier_district = $data['districtname'];
             $supplier->supplier_epa = $data['epaname'];
             $supplier->supplier_phonenumber  = $data['supplier_phonenumber'];
@@ -123,6 +127,7 @@ class SupplierController extends Controller
             if(empty($data['status'])){
                 $data['status'] = 0;
             }
+<<<<<<< HEAD
             if(empty($data['district_id'])){
                 return redirect()->back()->with('flash_message_error','District Name Missing ');    
             }
@@ -132,6 +137,12 @@ class SupplierController extends Controller
             
  	   		$product = new SupplierProduct;
             $product->supplier_id = $data['supplier_id'];
+=======
+
+ 	   		$product = new SupplierProduct;
+            $product->supplier_id = $data['supplier_id'];
+            //$product->supplier_location = $data['supplier_location']; 
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
             $product->product_district = $data['district_id'];
             $product->product_epa = $data['epaname'];
             $product->supplier_name = $data['supplier_id'];    
@@ -159,8 +170,13 @@ class SupplierController extends Controller
             $suppliers_drop_down .= "<option value='".$cat->id." ".$cat->supplier_name." '>".$cat->supplier_name."</option>";
 			
         }
+<<<<<<< HEAD
 
 
+=======
+
+
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
 		
 
     	return view('admin.suppliers.add_supplier_product')->with(compact('suppliers_drop_down','district'));
@@ -175,8 +191,13 @@ class SupplierController extends Controller
         }
 
         foreach($products as $key =>$val){
+<<<<<<< HEAD
             $supplier_epa = Supplier::where(['id'=>$val->supplier_id])->first();
             $products[$key]->supplier_epa = $supplier_epa->supplier_epa;
+=======
+            $supplier_location = Supplier::where(['id'=>$val->supplier_id])->first();
+            $products[$key]->supplier_location = $supplier_location->supplier_location;
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
         }
         $menu_active=3;
         $i=0;

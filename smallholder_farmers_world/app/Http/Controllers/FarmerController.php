@@ -20,8 +20,12 @@ class FarmerController extends Controller
     public function GetSubCatAgainstMainCatEdit($id){
         echo json_encode(DB::table('epas')->where('id', $id)->get());
     }
+<<<<<<< HEAD
     
     
+=======
+      
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
 
     // Adding Farmer to the system
     public function addFarmer(Request $request){
@@ -36,16 +40,21 @@ class FarmerController extends Controller
             if(empty($data['sex'])){
                 $data['sex'] = 0;
             }
+<<<<<<< HEAD
             if(empty($data['district_id'])){
                 return redirect()->back()->with('flash_message_error','District Name Missing ');    
             }
             if(empty($data['epaname'])){
                 $data['epaname'] = "Not Available";    
             }            
+=======
+            
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
             if($farmerCount>0){
                 return redirect()->back()->with('flash_message_error','Farmer With That ID Number Already Exists!');
             }elseif($farmerCount1>0){
                 return redirect()->back()->with('flash_message_error','Farmer With That Phone Number Already Exists!');
+                
             }else{
                 $farmer = new Farmer;
                 $farmer->full_name  = $data['farmer_name'];

@@ -36,7 +36,11 @@
                   <th>Advisor Name</th>
                   <th>Specialty</th>
                   <th>Phone Number</th>
+<<<<<<< HEAD
                   <th>EPA Name</th>
+=======
+                  <th>APA Name</th>
+>>>>>>> b93bc578f52316868abdf6ac085cdba739fb774f
                   <th>District</th>
                   <th>Working Days</th>
                   <th>Working Hours</th>
