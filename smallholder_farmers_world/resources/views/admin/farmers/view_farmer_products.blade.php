@@ -43,7 +43,7 @@
                   <th>Name</th>
                   <th>Produce Name</th>
                   <th>Price</th>
-                  <th>Location</th>
+                  <th>EPA</th>
                   <th>Attributes</th>
                   <th>Phone Number</th>
                   <th>Actions</th>
@@ -56,7 +56,7 @@
                   <td style="text-align: center; text-transform: uppercase"> {{ $product->produce_name }}</td>
                   <td style="text-align: center; text-transform: uppercase"> MWK {{ $product->selling_price }}</td>
 
-                  <td style="text-align: center; text-transform: uppercase"> {{ $product->location }}</td>
+                  <td style="text-align: center; text-transform: uppercase"> {{ $product->farmer_epa }}</td>
                   
 
 
@@ -75,7 +75,7 @@
                     </div>
                     <div class="modal-body">
                       <p style="text-align: center; text-transform: capitalize" >Farm Activity   : {{ $product->produce_name }} </p>
-                      <p style="text-align: center; text-transform: capitalize">Product Location     : {{ $product->location }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Product Location     : {{ $product->farmer_epa }} </p>
                     </div>
                   </div>
                   <div id="myModal2{{ $product->id }}" class="modal hide">

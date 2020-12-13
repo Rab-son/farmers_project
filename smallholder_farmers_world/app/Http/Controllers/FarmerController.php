@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Farmer;
 use App\FarmerProduct;
+use App\District;
+use App\EPAs;
+use DB;
 use Session;
 use App\UssdNotification;
 use App\Exports\farmersExport;
@@ -14,8 +17,15 @@ use Carbon\Carbon;
 class FarmerController extends Controller
 {
 
+    public function GetSubCatAgainstMainCatEdit($id){
+        echo json_encode(DB::table('epas')->where('id', $id)->get());
+    }
+    
+    
+
     // Adding Farmer to the system
     public function addFarmer(Request $request){
+        $district=District::all();//get data from table
         if(Session::get('adminDetails')['farmers_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
@@ -26,6 +36,12 @@ class FarmerController extends Controller
             if(empty($data['sex'])){
                 $data['sex'] = 0;
             }
+            if(empty($data['district_id'])){
+                return redirect()->back()->with('flash_message_error','District Name Missing ');    
+            }
+            if(empty($data['epaname'])){
+                $data['epaname'] = "Not Available";    
+            }            
             if($farmerCount>0){
                 return redirect()->back()->with('flash_message_error','Farmer With That ID Number Already Exists!');
             }elseif($farmerCount1>0){
@@ -35,16 +51,18 @@ class FarmerController extends Controller
                 $farmer->full_name  = $data['farmer_name'];
                 $farmer->phonenumber  = $data['phone_number'];
                 $farmer->id_number  = $data['id_number'];
-                $farmer->location  = $data['location'];
+                $farmer->farmer_district = $data['district_id'];
+                $farmer->farmer_epa = $data['epaname'];
                 $farmer->birthday_date  = $data['dob'];
                 $farmer->sex  = $data['sex'];
                 $farmer->next_of_kin  = $data['next_of_kin'];
                 $farmer->farm_activity  = $data['farm_activity'];
+                $farmer->status = $data['status']= 2;
                 $farmer->save();
                 return redirect('/admin/view-farmers')->with('flash_message_success','Farmer Details Added Successfully');
             }
         } 
-        return view('admin.farmers.add_farmer');
+        return view('admin.farmers.add_farmer')->with(compact('district'));
     }
 
     // Displaying Farmers in the system
@@ -55,31 +73,55 @@ class FarmerController extends Controller
         $menu_active=3;
         $i=0;
         $farmers = Farmer::orderBy('created_at','desc')->get();
+        $farmers = json_decode(json_encode($farmers));
+        /*
+    	foreach($farmers as $key => $val){
+    		$epaname = epas::where(['ep_id'=>$val->farmer_epa])->first();
+    		$farmers[$key]->epaname = $epaname->epaname;
+        }
+        */
+        foreach($farmers as $key => $val){
+    		$districtname = District::where(['id'=>$val->farmer_district])->first();
+    		$farmers[$key]->districtname = $districtname->districtname;
+        }
+
+
         return view('admin.farmers.view_farmers')->with(compact('farmers','menu_active','i'));
+
+        
     }
 
     // Updating Farmers Details in the system
     public function editFarmer(Request $request, $id = null){
+        $district=District::all();//get data from table
+
         if(Session::get('adminDetails')['farmers_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
         $farmerDetails = Farmer::where(['id'=>$id])->first();
         if($request->isMethod('post')){
             $data = $request->all();
+            $farmerCount = Farmer::where('id_number',$data['id_number'])->count();
+            $farmerCount1 = Farmer::where('phonenumber',$data['phone_number'])->count();
             if(empty($data['sex'])){
                 $data['sex'] = 0;
             }
+            else{
             Farmer::where(['id'=>$id])->update(['full_name'=>$data['farmer_name'],
                                                   'phonenumber'=>$data['phone_number'],
-                                                  'location'=>$data['location'],
+                                                  'id_number'=>$data['id_number'],
+                                                  'farmer_district' =>$data ['district_id'],
+                                                  'farmer_epa' => $data['epaname'],
                                                   'birthday_date'=>$data['dob'],
                                                   'sex'=>$data['sex'],
                                                   'next_of_kin'=>$data['next_of_kin'],
                                                   'farm_activity'=>$data['farm_activity']
-    			]);
+
+                ]);
+            }
     		return redirect('/admin/view-farmers')->with('flash_message_success','Farmer Details Updated Successfully');
         }
-        return view('admin.farmers.edit_farmer')->with(compact('farmerDetails'));
+        return view('admin.farmers.edit_farmer')->with(compact('farmerDetails','district'));
     }
 
     // Deleting Farmer Details in the system
@@ -151,8 +193,8 @@ class FarmerController extends Controller
             $products[$key]->phonenumber = $phonenumber->phonenumber;
         }
         foreach($products as $key =>$val){
-            $location = Farmer::where(['id'=>$val->farmer_id])->first();
-            $products[$key]->location = $location->location;
+            $farmer_epa = Farmer::where(['id'=>$val->farmer_id])->first();
+            $products[$key]->farmer_epa = $farmer_epa->farmer_epa;
         }        
         return view ('admin.farmers.view_farmer_products')->with(compact('products'));
 	}

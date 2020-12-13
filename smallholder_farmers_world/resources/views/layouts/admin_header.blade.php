@@ -6,8 +6,14 @@
 <!--close-Header-part--> 
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
-  <ul class="nav"><li class=""><a title="" href="javascript:void(0)"><span class="text">{{ Session::get('adminDetails')['username'] }} ({{ Session::get('adminDetails')['type'] }})</span></a></li>
-    <li  class="dropdown" id="profile-messages" ><a title="Change Password or Add Admin and More..." class="tip-bottom" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-cog"></i>  <span class="text">Change Settings</span><b class="caret"></b></a>
+  <ul class="nav">
+    <li class=""><a title="" href="javascript:void(0)">
+      <span class="text">{{ Session::get('adminDetails')['username'] }} ({{ Session::get('adminDetails')['type'] }})
+      </span></a>
+    </li>
+    <li  class="dropdown" id="profile-messages">
+      <a title="Change Password or Add Admin and More..." class="tip-bottom" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-cog"></i> 
+       <span class="text">Change Settings</span><b class="caret"></b></a>
       <ul class="dropdown-menu">
         <li class=""><a title="Change Password" href="{{ url('/admin/settings') }}"><i class="icon icon-key"></i> <span class="text">Update Password</span></a></li>
         <li class="divider"></li>

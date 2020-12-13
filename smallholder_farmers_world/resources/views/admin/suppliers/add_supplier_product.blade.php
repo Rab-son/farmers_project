@@ -41,6 +41,25 @@
                   <select>
                 </div>
               </div>
+              <div class="control-group"> 
+                <label class="control-label">District</label>
+                <div class="controls">
+                  <select style="width : 590px;" name="district_id" class="districtname" id="district_id">
+                      <option value="0" disabled selected>District Name</option>
+                      @foreach($district as $cat)
+		                	  <option value="{{$cat->id}}">{{ucfirst($cat->districtname)}}</option>
+		                  @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="control-group"> 
+                <label class="control-label">EPA</label>
+                <div class="controls">
+                  <select style="width : 590px;" name="epaname" id="epaname">
+                  <option value="0" disabled selected>EPA Name</option>
+                  </select>
+                </div>
+              </div>
               <div class="control-group">
                 <label class="control-label">Product Name</label>
                 <div class="controls">

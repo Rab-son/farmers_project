@@ -16,14 +16,14 @@ class marketsExport implements  FromCollection, WithHeadings
     public function collection()
     {
         //
-        $marketsData = Market::select('mark_name','mark_location')->orderBy('mark_id','Desc')->get();
+        $marketsData = Market::select('mark_name','market_epa')->orderBy('mark_id','Desc')->get();
         return $marketsData;
 
     }
 
 
     public function headings(): array{
-    	return['Market Name','Market Location'];
+    	return['Market Name','Market EPA'];
     }
 
 

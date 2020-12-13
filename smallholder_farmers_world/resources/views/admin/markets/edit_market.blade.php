@@ -21,10 +21,23 @@
                   <input type="text" name="mark_name" id="mark_name" placeholder="Full Market Name" value="{{ $marketDetails->mark_name }}">
                 </div>
               </div>
-              <div class="control-group">
-                <label class="control-label">Market Location</label>
+              <div class="control-group"> 
+                <label class="control-label">District</label>
                 <div class="controls">
-                  <input type="text" name="mark_location" id="mark_location" placeholder="Location of The Market" value="{{ $marketDetails->mark_location}}">
+                  <select style="width : 220px;" name="district_id" class="districtname" id="district_id">
+                      <option value="0" disabled selected>District Name</option>
+                      @foreach($district as $cat)
+		                	  <option value="{{$cat->id}}">{{ucfirst($cat->districtname)}}</option>
+		                  @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="control-group"> 
+                <label class="control-label">EPA</label>
+                <div class="controls">
+                  <select style="width : 220px;" name="epaname" id="epaname" type="epa">
+                  <option value="0" disabled selected>EPA Name</option>
+                  </select>
                 </div>
               </div>
               <div class="form-actions">

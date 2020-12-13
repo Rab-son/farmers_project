@@ -5,6 +5,9 @@ use Illuminate\Http\Request;
 use Session;
 use App\Market;
 use App\MarketProduct;
+use App\District;
+use App\EPAs;
+use DB;
 use App\Exports\marketsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
@@ -12,23 +15,43 @@ use Carbon\Carbon;
 class MarketController extends Controller
 {
 
+    public function GetSubCatAgainstMainCatEdit($id){
+        echo json_encode(DB::table('epas')->where('id', $id)->get());
+    }
+
     // Adding Market To The System
     public function addMarket(Request $request){
+        $district=District::all();//get data from table
+        
         if(Session::get('adminDetails')['markets_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
     	if($request->isMethod('post')){
-    		$data = $request->all();
+            $data = $request->all();
+            if(empty($data['district_id'])){
+                return redirect()->back()->with('flash_message_error','District Name Missing ');    
+            }
+            if(empty($data['epaname'])){
+                $data['epaname'] = "Not Available";    
+            }
+            
     		$market = new Market;
-    		$market->mark_name  = $data['mark_name'];
-            $market->mark_location  = $data['mark_location'];
+            $market->mark_name  = $data['mark_name'];
+            $market->market_district = $data['district_id'];
+            $market->market_epa = $data['epaname'];
             $market->save();
             return redirect('/admin/view-markets')->with('flash_message_success','Market Details Added Successfully');
         } 
-        return view('admin.markets.add_market');
+
+            	//Categories drop down start
+		$markets = Market::where(['market_parent_id' => 0])->get();
+
+        return view('admin.markets.add_market')->with(compact('markets_drop_down','district'));
+        
     }
 	// markets product
     public function addMarketProduct(Request $request){
+        $district=District::all();//get data from table
 		/*
 		if(Session::get('adminDetails')['ussd_notifications_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
@@ -40,11 +63,22 @@ class MarketController extends Controller
             if(empty($data['market_id'])){
 				return redirect()->back()->with('flash_message_error','Market Name Is Missing ');    
             }
+
             if(empty($data['status'])){
                 $data['status'] = 0;
             }
+            if(empty($data['district_id'])){
+                return redirect()->back()->with('flash_message_error','District Name Missing ');    
+            }
+            if(empty($data['epaname'])){
+                $data['epaname'] = "Not Available";    
+            }
+            
  	   		$product = new MarketProduct;
             $product->market_id = $data['market_id'];
+            $product->product_district = $data['district_id'];
+            $product->product_epa = $data['epaname'];
+            $product->mark_name = $data['market_id'];
             $product->product_name = $data['product_name']; 
  	   		$product->selling_price = $data['selling_price'];
             $product->amount = $data['amount'];
@@ -64,14 +98,16 @@ class MarketController extends Controller
     	//Categories drop down start
 		$markets = Market::where(['market_parent_id' => 0])->get();
 
-		$markets_drop_down = "<option value='' selected disabled>Select</option>";
+        $markets_drop_down = "<option value='' selected disabled>Select</option>";
+        $markets_drop_list = "<option value='' selected disabled>Select</option>";
 		foreach($markets as $cat){
-			$markets_drop_down .= "<option value='".$cat->mark_id."'>".$cat->mark_name."</option>";
+			$markets_drop_down .= "<option value='".$cat->mark_id." ".$cat->mark_name."'>".$cat->mark_name."</option>";
 			
-		}
-    	// Categories drop down end
+        }
+       // $markets_drop_down .= "<option value='".$cat->mark_id." ".$cat->mark_name."'>".$cat->mark_name."</option>";
+			
 
-    	return view('admin.markets.add_market_product')->with(compact('markets_drop_down'));
+    	return view('admin.markets.add_market_product')->with(compact('markets_drop_down','district'));
     }
     
     // Exporting Market details
@@ -87,11 +123,27 @@ class MarketController extends Controller
         $menu_active=3;
         $i=0;
         $markets = Market::orderBy('created_at','desc')->get();
+        
+        $markets = json_decode(json_encode($markets));
+        /*
+    	foreach($markets as $key => $val){
+    		$epaname = epas::where(['ep_id'=>$val->market_epa])->first();
+    		$markets[$key]->epaname = $epaname->epaname;
+        }*/
+
+        foreach($markets as $key => $val){
+    		$districtname = District::where(['id'=>$val->market_district])->first();
+    		$markets[$key]->districtname = $districtname->districtname;
+        }
+
+        
+
         return view('admin.markets.view_markets')->with(compact('markets','menu_active','i'));
     }
 
     // Updating Market Details in the system
     public function editMarket(Request $request, $mark_id = null){
+        $district=District::all();//get data from table
         if(Session::get('adminDetails')['markets_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
         }
@@ -99,11 +151,13 @@ class MarketController extends Controller
         if($request->isMethod('post')){
     		$data = $request->all();
             Market::where(['mark_id'=>$mark_id])->update(['mark_name'=>$data['mark_name'],
-                                                'mark_location'=>$data['mark_location']
+                                                'mark_name'=>$data['mark_name'],
+                                                'market_district' =>$data['district_id'],
+                                                'market_epa' => $data['epaname']
     			]);
     		return redirect('/admin/view-markets')->with('flash_message_success','Market Details Updated Successfully');
         }
-        return view('admin.markets.edit_market')->with(compact('marketDetails'));
+        return view('admin.markets.edit_market')->with(compact('marketDetails','district'));
     }
 
     // Deleting Market Details in the system
@@ -121,16 +175,39 @@ class MarketController extends Controller
     public function viewMarketProducts(Request $request){
         $products = MarketProduct::orderBy('created_at','desc')->get();
         //$products = json_decode(json_encode('$products'));
+        /*
         foreach($products as $key =>$val){
             $mark_name = Market::where(['mark_id'=>$val->market_id])->first();
             $products[$key]->mark_name = $mark_name->mark_name;
-		}
+        }
+        */
+        /*
+        $products = json_decode(json_encode($products));
+    	foreach($products as $key => $val){
+    		$epaname = epas::where(['ep_id'=>$val->product_epa])->first();
+    		$products[$key]->epaname = $epaname->epaname;
+        }
+        */
 		foreach($products as $key =>$val){
             $mark_name = Market::where(['mark_id'=>$val->market_id])->first();
             $products[$key]->mark_name = $mark_name->mark_name;
-		}
+        }
+        foreach($products as $key =>$val){
+            $market_epa = Market::where(['mark_id'=>$val->market_id])->first();
+            $products[$key]->market_epa = $market_epa->market_epa;
+        }
+        
+
+        foreach($products as $key => $val){
+    		$districtname = District::where(['id'=>$val->product_district])->first();
+    		$products[$key]->districtname = $districtname->districtname;
+        }
+
+        $menu_active=3;
+        $i=0;
+        //$markets = MarketProduct::orderBy('created_at','desc')->get();
         //echo "<pre>"; print_r($products);die;
-        return view ('admin.markets.view_market_products')->with(compact('products'));
+        return view ('admin.markets.view_market_products')->with(compact('products','menu_active','i'));
     }
     // edit market product
     public function editMarketProduct(Request $request, $id=null){
@@ -191,8 +268,6 @@ class MarketController extends Controller
     
             */
         }
-
-
     /*
     // edit farmer notificatio
     public function editMarketProduct(Request $request, $id=null){

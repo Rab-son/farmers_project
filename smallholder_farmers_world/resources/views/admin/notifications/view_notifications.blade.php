@@ -36,6 +36,7 @@
                   <th>Farmer Name</th>
                   <th>Message</th>
                   <th>Sender Name</th>
+                  <th>Message Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -48,9 +49,17 @@
                   <td style="text-align: center; text-transform: capitalize"> {{ $notification->full_name}}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $notification->sent_message }}</td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $notification->sender_name }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> 
+                    @if ($notification->status==1)
+                        <span class="badge badge-important">Unread <i class="icon-remove"></i></span>
+                      @else 
+                        <span class="badge badge-success">Read <i class="icon-ok-sign"></i></span>
+                      @endif
+                 </td>
+                  
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $notification->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
-                      <a href="{{ url('/admin/edit-notification/'.$notification->id) }}" class="btn btn-primary btn-mini">Edit</a> 
+                      <a href="{{ url('/admin/edit-notification/'.$notification->id) }}" class="btn btn-primary btn-mini">Resend</a> 
                       <a href="#myModal2{{ $notification->id }}" data-toggle="modal" class="btn btn-danger btn-mini deleteRecord">Delete</a>
                   </td>
                 </tr> 
@@ -61,7 +70,7 @@
                     </div>
                     <div class="modal-body">
                       <p style="text-align: center; text-transform: capitalize" >ID Number    : {{ $notification->farmer_id }} </p>
-                      <p style="text-align: center; text-transform: capitalize">Location     : {{ $notification->sent_message }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Message     : {{ $notification->sent_message }} </p>
                     </div>
                   </div>
                   <div id="myModal2{{ $notification->id }}" class="modal hide">

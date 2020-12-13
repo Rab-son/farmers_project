@@ -11,6 +11,7 @@ use App\Supplier;
 use App\Advisor;
 use App\Market;
 use App\UssdNotification;
+use App\District;
 use App\Admin;
 
 use Illuminate\Support\Facades\Hash;//to check hash Password
@@ -36,16 +37,81 @@ class AdminController extends Controller
     }
 
 
-    //function for accessing the dashboard on the admin panel
-    public function dashboard($id=null){
+    //function for accessing the alert
+    public function alert(Request $request,$id=null){
+        //counting some unread notifications
+        $count = Farmer::where('status','=','1')->paginate();
+        $count1 = Farmer::where('status','=','2')->paginate();
+        $message = UssdNotification::where('status','=','1')->paginate();
+        
         // counting items in the database
         $farmerCount = Farmer::paginate();
         $supplierCount = Supplier::paginate();
         $advisorCount = Advisor::paginate();
         $marketCount = Market::paginate();
         $ussdNotificationCount = UssdNotification::paginate();
+        if($request->isMethod('post')){
+            $data = $request->all();
+            Farmer::where(['id'=>$id])->update(['status'=>$data['status']]);
+            return redirect('/admin/alert')->with('flash_message_success','Marked As Read');
+        }
+
+        $menu_active=3;
+        $i=0;
+        $farmers = Farmer::orderBy('created_at','desc')->get();
+        $farmers = json_decode(json_encode($farmers));
+        //$farmerView  = Farmer::where('status', $farmers)->get();
+
+        $farmerView = Farmer::get();
+            
+        foreach($farmers as $key => $val){
+            $districtname = District::where(['id'=>$val->farmer_district])->first();
+            $farmers[$key]->districtname = $districtname->districtname;
+        }
+
         
-        return view('admin.dashboard')->with(compact('farmerCount','supplierCount','advisorCount','marketCount','ussdNotificationCount'));;
+        return view('admin.alerts.alert')->with(compact('farmerCount','message','count1','count','farmerView','supplierCount','advisorCount','marketCount','ussdNotificationCount','farmers','i'));;
+    }
+
+
+
+    //function for accessing the dashboard on the admin panel
+    public function dashboard(Request $request,$id=null){
+        //counting some unread notifications
+        $count = Farmer::where('status','=','1')->paginate();
+        $count1 = Farmer::where('status','=','2')->paginate();
+        $message = UssdNotification::where('status','=','1')->paginate();
+       
+        // counting items in the database
+        $farmerCount = Farmer::paginate();
+        $supplierCount = Supplier::paginate();
+        $advisorCount = Advisor::paginate();
+        $marketCount = Market::paginate();
+        $ussdNotificationCount = UssdNotification::paginate();
+        if($request->isMethod('post')){
+            $data = $request->all();
+            Farmer::where(['id'=>$id])->update(['status'=>$data['status']]);
+            return redirect('/admin/dashboard')->with('flash_message_success','Marked As Read');
+        }
+
+        if(Session::get('adminDetails')['farmers_access']==0){
+            return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
+        }
+        $menu_active=3;
+        $i=0;
+        $farmers = Farmer::orderBy('created_at','desc')->get();
+        $farmers = json_decode(json_encode($farmers));
+        //$farmerView  = Farmer::where('status', $farmers)->get();
+
+        $farmerView = Farmer::get();
+           
+        foreach($farmers as $key => $val){
+    		$districtname = District::where(['id'=>$val->farmer_district])->first();
+    		$farmers[$key]->districtname = $districtname->districtname;
+        }
+
+        
+        return view('admin.dashboard')->with(compact('farmerCount','message','count1','count','farmerView','supplierCount','advisorCount','marketCount','ussdNotificationCount','farmers','i'));;
     }
 
     // function for directing to settings page
@@ -56,7 +122,7 @@ class AdminController extends Controller
     }
 
     // function for checking the password
-    public function chkPassword(Request $request){
+    public function chckPassword(Request $request){
         $data = $request->all();
         //echo "<pre>"; print_r($data); die;
         $adminCount = Admin::where(['username' => Session::get('adminSession'),'password'=>md5($data['current_pwd'])])->count(); 
@@ -242,6 +308,8 @@ class AdminController extends Controller
         return view('admin.admins.approve_admin')->with(compact('admins','adminDetails','menu_active','i'));
         
     }
+
+
     // Deleting Admin Details in the system
     public function deleteAdmin(Request $request, $id = null){
         if(Session::get('adminDetails')['type']=="Sub Admin"){

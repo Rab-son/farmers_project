@@ -20,6 +20,7 @@
         <strong>{!! session('flash_message_success') !!}</strong>
       </div>
   @endif
+  
 <!--End-breadcrumbs-->
 
 <!--Action boxes-->
@@ -32,17 +33,28 @@
       @if(Session::get('adminDetails')['markets_access']==1)
         <li class="bg_lg span3"> <a href="{{ url('/admin/view-markets') }}"> <i class="icon-shopping-cart"></i> <span class="label label-important">{{$marketCount->total()}}</span>View Markets</a> </li>
       @endif
-      @if(Session::get('adminDetails')['suppliers_access']==1) 
-        <li class="bg_lo span3"> <a href="{{ url('/admin/view-suppliers') }}"> <i class="icon-truck"></i> <span class="label label-important">{{$supplierCount->total()}}</span> View Suppliers</a> </li>
+   
+      @if(Session::get('adminDetails')['markets_access']==1)
+        <li class="bg_lb"> <a href="{{ url('/admin/view-markets') }}"> <i class="icon-envelope"></i><span class="label label-important"> {{$ussdNotificationCount->total()}} </span> Sent Notifications</a> </li>
       @endif
+      
+   
+      @if(Session::get('adminDetails')['suppliers_access']==1) 
+        <li class="bg_lo"> <a href="{{ url('/admin/view-suppliers') }}"> <i class="icon-truck"></i> <span class="label label-important">{{$supplierCount->total()}}</span> View Suppliers </a> </li>
+      @endif
+      
+
       @if(Session::get('adminDetails')['advisors_access']==1)
         <li class="bg_lv span3"> <a href="{{ url('/admin/view-advisors') }}"> <i class="icon-user"></i> <span class="label label-important">{{$advisorCount->total()}}</span> View Advisors</a> </li>
       @endif
-      @if(Session::get('adminDetails')['markets_access']==1)
-        <li class="bg_lb span3"> <a href="{{ url('/admin/view-markets') }}"> <i class="icon-envelope"></i><span class="label label-important">{{$ussdNotificationCount->total()}}</span> Sent Notifications</a> </li>
+      
+
+
+      @if(Session::get('adminDetails')['farmers_access']==1)
+        <li class="bg_lb span3"> <a href="{{ url('/admin/alert') }}"> <i class="icon-bell"></i> <span class="label label-important">{{$count->total()}} {{$count1->total()}}</span> New Notifications</a> </li>
       @endif
       @if(Session::get('adminDetails')['ussd_notifications_access']==1)
-        <li class="bg_lg"> <a href="{{ url('/admin/view-notifications') }}"> <i class="icon icon-inbox"></i> Check Messages</a></li>
+        <li class="bg_lg"> <a href="{{ url('/admin/view-notifications') }}"> <i class="icon icon-inbox"></i><span class="label label-important">{{$message->total()}}</span> Check Messages</a></li>
       @endif
       <li class="bg_lr"> <a href="{{ url('/admin/view-report-farmer') }}"> <i class="icon-bar-chart"></i><span class="label label-important">{{$farmerCount->total()}}</span> Statistics</a> </li>
 

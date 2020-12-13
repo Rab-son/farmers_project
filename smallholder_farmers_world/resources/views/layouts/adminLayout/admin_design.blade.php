@@ -50,7 +50,7 @@
     <script src="{{asset('js/bootstrap-wysihtml5.js')}}"></script>
     <script src="{{asset('js/client.js')}}"></script>
     <script src="{{asset('js/canvasjs.min.js')}}"></script>
-    
+
     <script>
         $('.textarea_editor').wysihtml5();
     </script>

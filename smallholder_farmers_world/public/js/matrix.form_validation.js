@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	$("#access").hide();
 	$("#type").change(function(){
@@ -8,26 +7,52 @@ $(document).ready(function(){
 		}else{
 			$("#access").show();
 		}
-	})
-
-
-	$("#current_pwd").keyup(function(){
-		var current_pwd = $("#current_pwd").val();
-		$.ajax({
-			type:'get',
-			url:'/admin/check-pwd',
-			data:{current_pwd:current_pwd},
-			success:function(resp){
-				if(resp=="false"){
-					$("#chkPwd").html("<font color='red'>Current Password is incorrect</font>");
-				}else if(resp=="true"){
-					$("#chkPwd").html("<font color='green'>Current Password is correct</font>");
-				}
-			},error:function(){
-				alert("Error");
-			}
-		});
 	});
+	
+	$('#district_id').on('change', function () {
+		let id = $(this).val();
+		$('#epaname').empty();
+		$('#epaname').append(`<option value="0" disabled selected>Processing...</option>`);
+		$.ajax({
+		type: 'GET',
+		url: '/admin/GetSubCatAgainstMainCatEdit/' + id,
+		success: function (response) {
+		console.log('failing');
+		var response = JSON.parse(response);
+		console.log(response);   
+		$('#epaname').empty();
+		$('#epaname').append(`<option value="0" disabled selected>Select EPA Name</option>`);
+		response.forEach(element => {
+				$('#epaname').append(`<option value="${element['epaname']}">${element['epaname']}</option>`);
+
+				});
+		}
+		
+});
+});
+
+	
+
+
+$("#current_pwd").keyup(function(){
+	var current_pwd = $("#current_pwd").val();
+	$.ajax({
+		type:'get',
+		url:'/admin/check-pwd',
+		data:{current_pwd:current_pwd},
+		success:function(resp){
+			if(resp=="false"){
+				$("#chkPwd").html("<font color='red'>Current Password is incorrect</font>");
+			}else if(resp=="true"){
+				$("#chkPwd").html("<font color='green'>Current Password is correct</font>");
+			}
+		},error:function(){
+			alert("Error");
+		}
+	});
+});
+
+	
 	
 	$('input[type=checkbox],input[type=radio],input[type=file]').uniform();
 	
@@ -63,6 +88,8 @@ $(document).ready(function(){
 		}
 	});
 
+	
+
 	// Add Farmer Validation
     $("#add_farmer").validate({
 		rules:{
@@ -87,7 +114,7 @@ $(document).ready(function(){
 			sex:{
 				required:true,
 			},
-			location:{
+			district_id:{
 				required:true,
 			}
 		
@@ -343,6 +370,30 @@ $(document).ready(function(){
 			$(element).parents('.control-group').addClass('success');
 		}
 	});
+	// Add Product
+		// Add Farmer Validation
+    $("#add_product").validate({
+			rules:{
+				product_name:{
+					required:true
+				},
+				phone_number:{
+					required:true,
+					minlength:13,
+					maxlength:13
+				},
+			
+			},
+			errorClass: "help-inline",
+			errorElement: "span",
+			highlight:function(element, errorClass, validClass) {
+				$(element).parents('.control-group').addClass('error');
+			},
+			unhighlight: function(element, errorClass, validClass) {
+				$(element).parents('.control-group').removeClass('error');
+				$(element).parents('.control-group').addClass('success');
+			}
+		});
 	$("#number_validate").validate({
 		rules:{
 			min:{

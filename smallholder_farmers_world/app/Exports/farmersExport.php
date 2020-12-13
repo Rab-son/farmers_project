@@ -18,13 +18,13 @@ class farmersExport implements WithHeadings, FromCollection
 
     public function collection()
     {
-        $farmersData = Farmer::select('full_name','id_number','birthday_date','location','phonenumber','farm_activity')->orderBy('id','Desc')->get();
+        $farmersData = Farmer::select('full_name','id_number','birthday_date','farmer_epa','phonenumber','farm_activity')->orderBy('id','Desc')->get();
         
         return $farmersData;
 
     }
 
     public function headings(): array{
-    	return['Full Name','ID Number','Date of Birth','Location','Phone Number','Farming Activity'];
+    	return['Full Name','ID Number','Date of Birth','farmer_epa','Phone Number','Farming Activity'];
     }
 }

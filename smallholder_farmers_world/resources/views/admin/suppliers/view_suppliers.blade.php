@@ -34,7 +34,8 @@
                   <th>Number</th>
                   <th>Name</th>
                   <th>Phone Number</th>
-                  <th>Location</th>
+                  <th>EPA Name</th>
+                  <th>District</th>
                   <th>Working Hours</th>
                   <th>Working Days</th>
                   <th>Actions</th>
@@ -47,14 +48,42 @@
                   <td style="text-align: center"> {{ $i}} </td>
                   <td style="text-align: center"> {{ $supplier->supplier_name }}</td>
                   <td style="text-align: center"> {{ $supplier->supplier_phonenumber }}</td>
-                  <td style="text-align: center"> {{ $supplier->supplier_location }}</td>
+                  <td style="text-align: center"> {{ $supplier->supplier_epa }}</td>
+                  <td style="text-align: center"> {{ $supplier->districtname }}</td>
                   <td style="text-align: center"> {{ $supplier->working_hour }}</td>
                   <td style="text-align: center"> {{ $supplier->working_day }}</td>
                   <td style="text-align: center"> 
+                      <a href="#myModal{{ $supplier->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
                       <a href="{{ url('/admin/edit-supplier/'.$supplier->id) }}" class="btn btn-primary btn-mini">Edit</a> 
-                      <a id="delSupplier" href="{{ url('/admin/delete-supplier/'.$supplier->id) }}" class="btn btn-danger btn-mini deleteRecord">Delete</a>
-                  </td>
-                </tr>                  
+                      <a href="#myModal2{{ $supplier->id }}" data-toggle="modal" class="btn btn-danger btn-mini deleteRecord">Delete</a>                  
+                    </td>
+                </tr>
+                <div id="myModal{{ $supplier->id }}" class="modal hide">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3 style="text-align: center; text-transform: uppercase; color: black">{{ $supplier->supplier_name }} Full Details</h3>
+                    </div>
+                    <div class="modal-body">
+                      <p style="text-align: center; text-transform: capitalize">Phone Number    : {{ $supplier->supplier_phonenumber }} </p>
+                      <p style="text-align: center; text-transform: capitalize">EPA    : {{ $supplier->supplier_epa }} </p>
+                      <p style="text-align: center; text-transform: capitalize">District : {{ $supplier->districtname }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Working Hour: {{ $supplier->working_hour }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Working Day : {{ $supplier->working_hour }} </p> 
+                    </div>
+                  </div>
+                  <div id="myModal2{{ $supplier->id }}" class="modal hide">
+                    <div class="modal-header">
+                      <button data-dismiss="modal" class="close" type="button">×</button>
+                      <h3 style = "text-align: center"> You Want To Delete {{ $supplier->supplier_name }} Details ?</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h6 style ="text-align: center; color: red">Once You Delete The Details You Will Not Be Able To Recover It</h6>
+                    </div>
+                    <div class="modal-footer"> 
+                      <a href="#" class="btn btn-success" data-dismiss="modal">Cancel</a> 
+                      <a href="{{ url('/admin/delete-supplier/'.$supplier->id) }}" id="add-event-submit" class="btn btn-danger">Proceed To Delete</a> 
+                    </div>
+                  </div>                   
                 @endforeach
               </tbody>
             </table>

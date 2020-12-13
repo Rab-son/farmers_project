@@ -24,16 +24,21 @@ Route::match(['get','post'],'/admin/admin-register','AdminController@adminRegist
 Route::get('/admin/adminLogin-register','AdminController@adminLoginRegister');// Route for admin login registration
 Route::get('/logout','AdminController@logout');// Route for admin logout
 
+
 //Securing dashboard routes using middleware
 Route::group(['middleware' => ['adminlogin']], function(){
     // Adminstrator Management
     Route::get('/admin/dashboard','AdminController@dashboard');// Route for admin dashboard
+    Route::get('/admin/alert','AdminController@alert');// Route for admin notifications
     Route::get('/admin/settings','AdminController@settings');// Route for settings
     Route::get('/admin/check-pwd', 'AdminController@chckPassword');// Route for checking password
+    //Route::get('/admin/check-pwd','AdminController@chkPassword');
     Route::match(['get','post'], '/admin/update-pwd', 'AdminController@updatePassword');// Route for updating password
     Route::get('/admin/view-admins','AdminController@viewAdmins');// Route for viewing admins
     Route::match(['get','post'], '/admin/add-admin', 'AdminController@addAdmin');// Route for adding an adminstrator
     Route::match(['get','post'], '/admin/edit-admin/{id}', 'AdminController@editAdmin');// Route for editing an adminstrator
+    Route::match(['get','post'], '/admin/dashboard/{id}', 'AdminController@dashboard');// Route for editing an adminstrator
+    Route::match(['get','post'], '/admin/alert/{id}', 'AdminController@alert');
     Route::match(['get','post'], '/admin/approve-admin/{id}', 'AdminController@approveAdmin');// Route for approving an adminstrator
     Route::match(['get', 'post'], '/admin/delete-admin/{id}', 'AdminController@deleteAdmin');//Route for deleting farmer details
     
@@ -69,6 +74,7 @@ Route::group(['middleware' => ['adminlogin']], function(){
     Route::get('/admin/view-market-products','MarketController@viewMarketProducts');// Route for viewing product details
     Route::get('/admin/export-markets','MarketController@exportMarkets');// Route for exporting farmer details
     Route::get('/admin/view-report-market','MarketController@viewMarketCharts');// Route for viewing market charts details
+    Route::get('/admin/GetSubCatAgainstMainCatEdit/{id}', 'MarketController@GetSubCatAgainstMainCatEdit');
 
 
     //Calculations

@@ -36,7 +36,8 @@
                 <tr>
                   <th>Number</th>
                   <th>Market Name</th>
-                  <th>Market Location</th>
+                  <th>EPA Name</th>
+                  <th>District</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -46,7 +47,8 @@
                 <tr class="gradeX">
                   <td style="text-align: center"> {{ $i}} </td>
                   <td style="text-align: center; text-transform: capitalize"> {{ $market->mark_name }}</td>
-                  <td style="text-align: center; text-transform: capitalize"> {{ $market->mark_location }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $market->market_epa }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $market->districtname }}</td>
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $market->mark_id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
                       <a href="{{ url('/admin/edit-market/'.$market->mark_id) }}" class="btn btn-primary btn-mini">Edit</a> 
@@ -60,7 +62,7 @@
                     </div>
                     <div class="modal-body">
                       <p style="text-align: center; text-transform: capitalize">Market Name  : {{ $market->mark_name }} </p>
-                      <p style="text-align: center; text-transform: capitalize">Location     : {{ $market->mark_location }} </p>
+                      <p style="text-align: center; text-transform: capitalize">Location     : {{ $market->market_epa }} </p>
                     </div>
                   </div>
                   <div id="myModal2{{ $market->mark_id }}" class="modal hide">

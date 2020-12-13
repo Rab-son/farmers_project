@@ -21,10 +21,45 @@
                   <input type="text" name="supplier_name" id="supplier_name" placeholder="Full Supplier Name" value="{{ $supplierDetails->supplier_name }}">
                 </div>
               </div>
-              <div class="control-group">
-                <label class="control-label">Supplier Location</label>
+              <div class="control-group"> 
+                <label class="control-label">District</label>
                 <div class="controls">
-                  <input type="text" name="supplier_location" id="supplier_location" placeholder="Location of The Supplier" value="{{ $supplierDetails->supplier_location}}">
+                  <select style="width : 220px;" name="districtname"  id="district_id">
+                      <option value="0" disabled selected>District Name</option>
+                      @foreach($district as $cat)
+		                	  <option value="{{$cat->id}}" >{{ucfirst($cat->districtname)}}</option>
+		                  @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="control-group"> 
+                <label class="control-label">EPA</label>
+                <div class="controls">
+                  <select style="width : 220px;" name="epaname" id="epaname">
+                  <option value="0" disabled selected>EPA Name</option>
+                  </select>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Supplier Phonenumber</label>
+                <div class="controls">
+                  <input type="text" name="supplier_phonenumber" id="supplier_phonenumber" value="{{ $supplierDetails->supplier_phonenumber}}">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Working Hours</label>
+                <div class="controls">
+                  <input type="text" name="working_hour" id="working_hour" value="{{ $supplierDetails->working_hour}}">
+                </div>
+              </div>
+              <div class="control-group"> 
+                <label class="control-label">Working Days</label>
+                <div class="controls">
+                  <select name="working-day" id="working-day" style="width : 220px;">
+                    <option value="Monday-Sunday">Monday-Sunday</option>
+                    <option value="Monday-Saturday">Monday-Saturday</option>
+                    <option value="Monday-Friday">Monday-Friday</option>
+                  </select>
                 </div>
               </div>
               <div class="form-actions">

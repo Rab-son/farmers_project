@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\UssdNotification;
 use App\Farmer;
 use Session;
+use Auth;
 
 class UssdNotificationController extends Controller
 {
@@ -36,12 +37,12 @@ class UssdNotificationController extends Controller
 
     	//Categories drop down start
     	$farmers = Farmer::where(['parent_id'=>0])->get();
-    	$farmers_dropdown = "<option value='' selected disabled>Select</option>";
+    	$farmers_dropdown = "<option selected disabled>Select</option>";
     	foreach($farmers as $far){
-    		$farmers_dropdown .= "<option value='".$far->id."'>".$far->phonenumber."</option>";
-    		$sub_farmers = Farmer::where(['parent_id'=>$far->id])->get();
+    		$farmers_dropdown .= "<option value='".$far->id."'>".$far->full_name."</option>";
+    		$sub_farmers = Farmer::where(['id'=>$far->id])->get();
     		foreach($sub_farmers as $sub_far){
-    			$farmers_dropdown .= "<option value = '".$sub_far->id."'>&nbsp;--&nbsp;".$sub_far->phonenumber."</option>";
+    			$farmers_dropdown .= "<option value = '".$sub_far->id."'>&nbsp;--&nbsp; ".$sub_far->phonenumber."</option>";
     		}
     	}
     	// Categories drop down end
@@ -58,26 +59,45 @@ class UssdNotificationController extends Controller
     		UssdNotification::where(['id'=>$id])->delete();
     		return redirect()->back()->with('flash_message_success','Notification Deleted Successfully');
     	}
+	}
+	
+    public function editMarket(Request $request, $mark_id = null){
+        $district=District::all();//get data from table
+        if(Session::get('adminDetails')['markets_access']==0){
+            return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
+        }
+        $marketDetails = Market::where(['mark_id'=>$mark_id])->first();
+        if($request->isMethod('post')){
+    		$data = $request->all();
+            Market::where(['mark_id'=>$mark_id])->update(['mark_name'=>$data['mark_name'],
+                                                'mark_name'=>$data['mark_name'],
+                                                'market_district' =>$data['district_id'],
+                                                'market_epa' => $data['epaname']
+    			]);
+    		return redirect('/admin/view-markets')->with('flash_message_success','Market Details Updated Successfully');
+        }
+        return view('admin.markets.edit_market')->with(compact('marketDetails','district'));
     }
+
+
 
 	public function editNotification(Request $request, $id=null){
 		if(Session::get('adminDetails')['ussd_notifications_access']==0){
             return redirect('/admin/dashboard')->with('flash_message_error','You have no access for this module');
-        }
+		}
+		$notificationDetails = UssdNotification::where(['id'=>$id])->first();
 		if($request->isMethod('post')){
 			$data = $request->all();
 			//echo "<prev>"; print_r($data); die;
- 	   		if(empty($data['sent_message'])){
- 	   			$data['sent_message'] = '';
- 	   		}
+			// Get farmer details
 
-			UssdNotification::where(['id'=>$id])->update(['farmer_id'=>$data['farmer_id'],'sent_message'=>$data['sent_message'],'product_code'=>$data['product_code'],'product_color'=>$data['product_color'],'description'=>$data['description'],'price'=>$data['price'],'image'=>$filename]);
-
+			UssdNotification::where(['id'=>$id])->update(['farmer_id'=>$data['farmer_id'],
+														 'sent_message'=>$data['sent_message'],
+														 'description'=>$data['description']
+														  ]);
 			return redirect()->back()->with('flash_message_success','Notification Has Been Updated Successfully');
 		}
 
-		// Get farmer details
-		$notificationDetails = UssdNotification::where(['id'=>$id])->first();
 		//farmers drop down start
 		$farmers = Farmer::where(['parent_id'=>0])->get();
     	$farmers_dropdown = "<option value='' selected disabled>Select</option>";

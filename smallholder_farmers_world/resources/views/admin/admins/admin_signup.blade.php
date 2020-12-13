@@ -21,7 +21,7 @@
             @endif
             <form class="loginform" class="form-vertical" method="POST" action="{{ url('/admin/admin-register') }}" name="password_validate1" id="password_validate1" novalidate="novalidate"> {{ csrf_field() }}
 				 <div class="control-group normal_text"> 
-                 <br><h4> SFW Adminstrator Registration </h4>
+                 <br><h4 > SFW Adminstrator Registration </h4>
                  </div>
                 <div class="control-group">
                     <div class="controls">
@@ -46,12 +46,21 @@
                 </div>
                 <div class="control-group"> 
                 <div class="controls">
+                <!--
                 <div class="main_input_box">
-                    <select name="type" id="type" style="width :360px;">
+                    <select name="type" readonly="" id="type" style="width :360px;">
                     <option value="Admin">Admin</option>
                     <option value="Sub Admin">Sub Admin</option>
                     </select>
                 </div>
+                -->
+                <div class="main_input_box">
+                    <select name="type" readonly="" id="type"  style="width :360px;">
+                    <option value="Admin">Admin</option>
+                    <option value="Sub Admin">Sub Admin</option>
+                    </select>
+                </div>
+
                 </div>
                 </div>
                 <div class="control-group" id="access">

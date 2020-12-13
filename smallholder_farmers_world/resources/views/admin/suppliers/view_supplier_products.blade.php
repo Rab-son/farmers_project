@@ -44,7 +44,7 @@
                   <th>Product</th>
                   <th>Status</th>
                   <th>Price</th>
-                  <th>Location</th>
+                  <th>EPA</th>
                   <th>Attributes</th>
                   <th>Actions</th>
                 </tr>
@@ -62,7 +62,7 @@
                     @endif
                   </td>
                   <td style="text-align: center; text-transform: uppercase"> {{ $product->selling_price }}</td>
-                  <td style="text-align: center; text-transform: capitalize"> {{ $product->supplier_location }}</td>
+                  <td style="text-align: center; text-transform: capitalize"> {{ $product->supplier_epa }}</td>
                   <td style="text-align: center;"><a href="#myModal3{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View Other Attr</a></td>
                   <td style="text-align: center"> 
                       <a href="#myModal{{ $product->id }}" data-toggle="modal" class="btn btn-success btn-mini">View</a>
